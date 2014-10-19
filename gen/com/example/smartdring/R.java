@@ -21,16 +21,22 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int back=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f080006;
-        public static final int alarm=0x7f080000;
-        public static final int music=0x7f080001;
-        public static final int ring=0x7f080002;
-        public static final int system=0x7f080003;
-        public static final int textView1=0x7f080005;
-        public static final int voice=0x7f080004;
+        public static final int LinearLayout01=0x7f080000;
+        public static final int action_settings=0x7f08000b;
+        public static final int alarm=0x7f080001;
+        public static final int alarmtxtv=0x7f080002;
+        public static final int music=0x7f080003;
+        public static final int musictxtv=0x7f080004;
+        public static final int ring=0x7f080005;
+        public static final int ringtxtv=0x7f080006;
+        public static final int system=0x7f080007;
+        public static final int systemtxtv=0x7f080008;
+        public static final int voice=0x7f080009;
+        public static final int voicetxtv=0x7f08000a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -48,11 +54,6 @@ public final class R {
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
 
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.

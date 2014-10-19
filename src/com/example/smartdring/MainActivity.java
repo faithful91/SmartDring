@@ -4,6 +4,8 @@ package com.example.smartdring;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.net.Uri;
 
 public class MainActivity extends Activity {
@@ -21,7 +25,16 @@ SeekBar ring=null;
 SeekBar system=null;
 SeekBar voice=null;
 AudioManager mgr=null;
-	private Handler handler;
+TextView alarmtxtv=null;
+TextView musictxtv=null;
+TextView ringtxtv=null;
+TextView systemtxtv=null;
+TextView voicetxtv=null;
+SharedPreferences pref = null;
+Editor editor = null;
+
+
+private Handler handler;
 	private ContentObserver mVolumeObserver;
 
 
@@ -31,19 +44,25 @@ public void onCreate(Bundle savedInstanceState) {
   setContentView(R.layout.activity_main);
 
   mgr=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
-  
+
+
   alarm=(SeekBar)findViewById(R.id.alarm);
   music=(SeekBar)findViewById(R.id.music);
   ring=(SeekBar)findViewById(R.id.ring);
   system=(SeekBar)findViewById(R.id.system);
   voice=(SeekBar)findViewById(R.id.voice);
-  
-  initBar(alarm, AudioManager.STREAM_ALARM);
-  initBar(music, AudioManager.STREAM_MUSIC);
-  initBar(ring, AudioManager.STREAM_RING);
-  initBar(system, AudioManager.STREAM_SYSTEM);
+  alarmtxtv =(TextView)findViewById(R.id.alarmtxtv);
+  musictxtv =(TextView)findViewById(R.id.musictxtv);
+  ringtxtv =(TextView)findViewById(R.id.ringtxtv);
+  systemtxtv =(TextView)findViewById(R.id.systemtxtv);
+  voicetxtv =(TextView)findViewById(R.id.voicetxtv);
 
-  initBar(voice, AudioManager.STREAM_VOICE_CALL);
+  initBar(alarm, AudioManager.STREAM_ALARM, alarmtxtv,"alarm");
+  initBar(music, AudioManager.STREAM_MUSIC,musictxtv,"music");
+  initBar(ring, AudioManager.STREAM_RING,ringtxtv, "ring");
+  initBar(system, AudioManager.STREAM_SYSTEM,systemtxtv,"system");
+
+  initBar(voice, AudioManager.STREAM_VOICE_CALL,voicetxtv,"voice");
   Handler mHandler = new Handler();
 	// methode d'observateur
 	mVolumeObserver = new ContentObserver(mHandler) {
@@ -82,18 +101,30 @@ public void onCreate(Bundle savedInstanceState) {
 
 	};
 
+	
+
 }
 
-private void initBar(SeekBar bar, final int stream) {
+private void initBar(SeekBar bar, final int stream, final TextView txtv,String dataName) {
   bar.setMax(mgr.getStreamMaxVolume(stream));
   bar.setProgress(mgr.getStreamVolume(stream));
-  
+	SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); 
+
+	  Editor editor = pref.edit();	
+  txtv.setText(" "+String.valueOf(mgr.getStreamVolume(stream)+"/"+String.valueOf(mgr.getStreamMaxVolume(stream))));  
+  editor.putString(dataName, String.valueOf(mgr.getStreamVolume(stream)));
+  editor.commit();
+  String x=pref.getString("alarm", null);
+  Toast.makeText(getApplicationContext(), x,
+		   Toast.LENGTH_LONG).show();
   bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
     public void onProgressChanged(SeekBar bar, int progress,
                                   boolean fromUser) {
       mgr.setStreamVolume(stream, progress,
                           AudioManager.FLAG_PLAY_SOUND);
-      Log.i(null, "hoho");
+      
+      txtv.setText(String.valueOf(mgr.getStreamVolume(stream)+"/"+String.valueOf(mgr.getStreamMaxVolume(stream))));  
+     
     }
     
     public void onStartTrackingTouch(SeekBar bar) {
