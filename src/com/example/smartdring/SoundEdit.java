@@ -41,7 +41,7 @@ private Handler handler;
 @Override
 public void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
-  setContentView(R.layout.activity_main);
+  setContentView(R.layout.activity_sound_edit);
 
   mgr=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
