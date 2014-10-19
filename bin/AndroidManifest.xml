@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.smartdring.SoundEdit"
+            android:label="@string/title_activity_sound_edit" >
+        </activity>
+        <activity
+            android:name="com.example.smartdring.MainActivity1"
+            android:label="@string/title_activity_main_activity1" >
+        </activity>
     </application>
 
 </manifest>
