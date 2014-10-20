@@ -32,7 +32,7 @@ TextView systemtxtv=null;
 TextView voicetxtv=null;
 SharedPreferences pref = null;
 Editor editor = null;
-
+String SharedPref;
 
 private Handler handler;
 	private ContentObserver mVolumeObserver;
@@ -42,6 +42,9 @@ private Handler handler;
 public void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_sound_edit);
+  Intent iin= getIntent();
+  Bundle b = iin.getExtras();
+   SharedPref=(String)b.get("sp");
 
   mgr=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
@@ -69,34 +72,6 @@ public void onCreate(Bundle savedInstanceState) {
 		@Override
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
-			if (ring != null && mgr != null) {
-				int volumering= mgr
-						.getStreamVolume(AudioManager.STREAM_RING);
-				ring.setProgress(volumering);
-			
-				if (system != null && mgr != null) {
-					int volumesystem = mgr
-							.getStreamVolume(AudioManager.STREAM_SYSTEM);
-					system.setProgress(volumesystem);
-				}
-				if (music != null && mgr != null) {
-					int volumemusic = mgr
-							.getStreamVolume(AudioManager.STREAM_MUSIC);
-					music.setProgress(volumemusic);
-					
-				}
-				if (alarm != null && mgr != null) {
-					int volumealarm = mgr
-							.getStreamVolume(AudioManager.STREAM_ALARM);
-					alarm.setProgress(volumealarm);
-				}
-				if (voice != null && mgr != null) {
-					int volumevoice = mgr
-							.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
-					voice.setProgress(volumevoice);
-				}
-			
-			}
 		}
 
 	};
@@ -105,24 +80,33 @@ public void onCreate(Bundle savedInstanceState) {
 
 }
 
-private void initBar(SeekBar bar, final int stream, final TextView txtv,String dataName) {
-  bar.setMax(mgr.getStreamMaxVolume(stream));
-  bar.setProgress(mgr.getStreamVolume(stream));
-	SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); 
+private void initBar(SeekBar bar, final int stream, final TextView txtv,final String dataName) {
+	SharedPreferences pref = getApplicationContext().getSharedPreferences(SharedPref, 0); 
+
+	bar.setMax(mgr.getStreamMaxVolume(stream));
+	final String spget=pref.getString(dataName, null);
+	
+  bar.setProgress(Integer.parseInt(spget));
 
 	  Editor editor = pref.edit();	
+	  editor.putString(dataName, spget);
+
   txtv.setText(" "+String.valueOf(mgr.getStreamVolume(stream)+"/"+String.valueOf(mgr.getStreamMaxVolume(stream))));  
-  editor.putString(dataName, String.valueOf(mgr.getStreamVolume(stream)));
   editor.commit();
-  String x=pref.getString("alarm", null);
-  Toast.makeText(getApplicationContext(), x,
-		   Toast.LENGTH_LONG).show();
+  
+ 
   bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
     public void onProgressChanged(SeekBar bar, int progress,
                                   boolean fromUser) {
       mgr.setStreamVolume(stream, progress,
                           AudioManager.FLAG_PLAY_SOUND);
-      
+  	SharedPreferences pref = getApplicationContext().getSharedPreferences(SharedPref, 0); 
+
+      Editor editor = pref.edit();	
+
+      editor.putString(dataName, String.valueOf(progress));
+      editor.commit();
+
       txtv.setText(String.valueOf(mgr.getStreamVolume(stream)+"/"+String.valueOf(mgr.getStreamMaxVolume(stream))));  
      
     }
@@ -136,6 +120,11 @@ private void initBar(SeekBar bar, final int stream, final TextView txtv,String d
     }
   });
 }
+
+public void activeProfile (String SharedPrefAc)
+{
+	
+	}
 
 @Override
 protected void onResume() {

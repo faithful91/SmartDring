@@ -7,16 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -28,9 +33,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	AudioManager mgr=null;
+
 	TextView lb;
    ListView list1 ;
 	private List<SoundProfile> myCars = new ArrayList<SoundProfile>();
+	  SoundEdit e=new SoundEdit();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +51,8 @@ public class MainActivity extends Activity {
         String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
             "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
             "Linux", "OS/2" };
-        SoundProfile Silent=new SoundProfile("Silent");
-        SoundProfile Normale=new SoundProfile("Normale");
+        SoundProfile Silent=new SoundProfile("Silent","MyPref");
+        SoundProfile Normale=new SoundProfile("Normale","Pref3");
         myCars.add(Silent);
         myCars.add(Normale);
         MainActivityAdapter adapter = new MainActivityAdapter(this, myCars);
@@ -59,6 +67,10 @@ public class MainActivity extends Activity {
 			ContextMenuInfo menuInfo) {
 		// TODO Auto-generated method stub
 		super.onCreateContextMenu(menu, v, menuInfo);
+		if (v.getId()==R.id.list) {
+    	    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+    		menu.setHeaderTitle(myCars.get(info.position).getName());}
+		
 		menu.add("Activer");
 		menu.add("Modifier");
 
@@ -80,5 +92,35 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
+	
+	
+	
+	  public boolean onContextItemSelected(MenuItem item) {
+          AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+          if (item.getTitle() == "Activer") {
+        	  mgr=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
+
+        	  SharedPreferences pref1 = getApplicationContext().getSharedPreferences(myCars.get(info.position).getSharedPref(), MODE_WORLD_READABLE); 
+        		String spget=pref1.getString("alarm", null);
+        		 
+        		mgr.setStreamVolume(AudioManager.STREAM_ALARM, Integer.parseInt(spget), 0);
+
+        	  
+          }
+          else if (item.getTitle() == "Modifier") {
+        	  Toast.makeText(getApplicationContext(), myCars.get(info.position).getName(),
+       			   Toast.LENGTH_LONG).show();
+       	  Intent intent = new Intent(this, SoundEdit.class);
+       	  intent.putExtra("sp", myCars.get(info.position).getSharedPref());   
+       	  startActivity(intent);
+       	  } else {
+                  return false;
+          }
+          return true;
+	  }
+	  
+	  
+	 
 		 }
 
