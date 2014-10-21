@@ -23,6 +23,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.ContentObserver;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.ContextMenu;
@@ -40,45 +41,35 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	AudioManager mgr=null;
+	AudioManager mgr=null;	private ContentObserver mVolumeObserver;
+
 TextView testtxt;
 	TextView lb;
    ListView list1 ;
-	private List<SoundProfile> myCars = new ArrayList<SoundProfile>();
+   Context e1=this;
+   SoundProfile InsSProfile=new SoundProfile(e1);
 	  SoundEdit e=new SoundEdit();
-		private List<String> profileName = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	       setContentView(R.layout.list);
 
 	    
-
-
+	      
 
 		lb =(TextView)findViewById(R.id.label);
 	       list1 = (ListView) findViewById(R.id.list);
-	       readFromFile();
 	       
-       
-        for (int i=0;i<profileName.size();i++)
-        {
-        	SoundProfile g = new SoundProfile(profileName.get(i),profileName.get(i)+"spp");
-            myCars.add(g);
 
-        }
-        
+	       InsSProfile.loadProfiles();        
       
         
-        MainActivityAdapter adapter = new MainActivityAdapter(this, myCars);
+        MainActivityAdapter adapter = new MainActivityAdapter(this, InsSProfile.Profiles);
         list1.setAdapter(adapter) ;
        getWindow().setBackgroundDrawableResource(R.drawable.img2);
        registerForContextMenu(list1);
        registerClickCallback();
        testtxt =(TextView)findViewById(R.id.music);
-Toast.makeText(getApplicationContext(), readFromFile(),
-		   Toast.LENGTH_LONG).show();
-
 	}
 
 	@Override
@@ -88,10 +79,11 @@ Toast.makeText(getApplicationContext(), readFromFile(),
 		super.onCreateContextMenu(menu, v, menuInfo);
 		if (v.getId()==R.id.list) {
     	    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-    		menu.setHeaderTitle(myCars.get(info.position).getName());}
+    		menu.setHeaderTitle(InsSProfile.Profiles.get(info.position).getName());}
 		
 		menu.add("Activer");
 		menu.add("Modifier");
+		menu.add("Delete");
 
 	}
 
@@ -103,7 +95,7 @@ Toast.makeText(getApplicationContext(), readFromFile(),
 					int position, long id) {
 				
 	              viewClicked.showContextMenu();
-					SoundProfile clickedCar = myCars.get(position);
+					SoundProfile clickedCar = InsSProfile.Profiles.get(position);
 
 				String message = "You clicked position " 
 								+ " Which is car make " + clickedCar.getName();
@@ -118,17 +110,25 @@ Toast.makeText(getApplicationContext(), readFromFile(),
           AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
           if (item.getTitle() == "Activer") {
-        	  mgr=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
         	 
 
         	  
           }
+
+          else  if (item.getTitle() == "Delete") {
+
+        	  InsSProfile.delete(InsSProfile.Profiles.get(info.position).getName());
+        	  InsSProfile.Profiles.remove(InsSProfile.Profiles.get(info.position));
+        	  list1.invalidateViews();
+
+        	  
+          }
           else if (item.getTitle() == "Modifier") {
-        	  Toast.makeText(getApplicationContext(), myCars.get(info.position).getName(),
+        	  Toast.makeText(getApplicationContext(), InsSProfile.Profiles.get(info.position).getName(),
        			   Toast.LENGTH_LONG).show();
        	  Intent intent = new Intent(this, SoundEdit.class);
-       	  intent.putExtra("sp", myCars.get(info.position).getSharedPref());   
+       	  intent.putExtra("sp", InsSProfile.Profiles.get(info.position).getSharedPref());   
        	  startActivity(intent);
        	  } else {
                   return false;
@@ -136,48 +136,12 @@ Toast.makeText(getApplicationContext(), readFromFile(),
           return true;
 	  }
 	  
-	  private void writeToFile(String data) {
-		    try {
-		        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("config.txt", Context.MODE_APPEND));
-		        outputStreamWriter.write(data);
-		        outputStreamWriter.close();
-		    }
-		    catch (IOException e) {
-		        Log.e("Exception", "File write failed: " + e.toString());
-		    } 
-		}
-
-
-		private String readFromFile() {
-
-		    String ret = "";
-
-		    try {
-		        InputStream inputStream = openFileInput("config.txt");
-
-		        if ( inputStream != null ) {
-		            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-		            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-		            String receiveString = "";
-		            StringBuilder stringBuilder = new StringBuilder();
-
-		            while ( (receiveString = bufferedReader.readLine()) != null ) {
-		            	profileName.add(receiveString);
-		                
-		            }
-
-		            inputStream.close();
-		            ret = stringBuilder.toString();
-		        }
-		    }
-		    catch (FileNotFoundException e) {
-		        Log.e("login activity", "File not found: " + e.toString());
-		    } catch (IOException e) {
-		        Log.e("login activity", "Can not read file: " + e.toString());
-		    }
-
-		    return ret;
-		}
+	
 	 
+
+
+		
+	
+
 		 }
 
