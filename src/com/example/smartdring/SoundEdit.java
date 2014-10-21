@@ -1,6 +1,8 @@
 package com.example.smartdring;
 
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -33,10 +35,9 @@ TextView voicetxtv=null;
 SharedPreferences pref = null;
 Editor editor = null;
 String SharedPref;
-
+String spget=null ;
 private Handler handler;
 	private ContentObserver mVolumeObserver;
-
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,11 @@ public void onCreate(Bundle savedInstanceState) {
   ringtxtv =(TextView)findViewById(R.id.ringtxtv);
   systemtxtv =(TextView)findViewById(R.id.systemtxtv);
   voicetxtv =(TextView)findViewById(R.id.voicetxtv);
+  Toast.makeText(getApplicationContext(),SharedPref,
+		   Toast.LENGTH_LONG).show();
 
+  test();
+  
   initBar(alarm, AudioManager.STREAM_ALARM, alarmtxtv,"alarm");
   initBar(music, AudioManager.STREAM_MUSIC,musictxtv,"music");
   initBar(ring, AudioManager.STREAM_RING,ringtxtv, "ring");
@@ -80,34 +85,83 @@ public void onCreate(Bundle savedInstanceState) {
 
 }
 
-private void initBar(SeekBar bar, final int stream, final TextView txtv,final String dataName) {
-	SharedPreferences pref = getApplicationContext().getSharedPreferences(SharedPref, 0); 
+public void test(){
+	String alarm=null;
+	String music=null;
+	String ring=null;
+	String system=null;
+	String voice=null;
+	File f = getDatabasePath(SharedPref);
 
+	if (f != null)
+	    {Log.i("TAG", f.getAbsolutePath());
+		pref = getApplicationContext().getSharedPreferences(SharedPref, 0);
+		Editor editor = pref.edit();	
+		alarm=pref.getString("alarm", null);
+music=pref.getString("music", null);
+ring=pref.getString("ring", null);
+system=pref.getString("system", null);
+voice=pref.getString("voice", null);
+
+	    if (alarm==null)  
+		  editor.putString("alarm", "0");
+	    if (music==null)  
+			  editor.putString("music", "0");
+	    if (ring==null)  
+			  editor.putString("ring", "0");
+	    if (system==null)  
+			  editor.putString("system", "0");
+	    if (voice==null)  
+			  editor.putString("voice", "0");
+
+		  editor.commit();
+
+
+	    
+	    }
+	else {pref = getApplicationContext().getSharedPreferences(SharedPref, 0); 
+	 Editor editor = pref.edit();	
+	  editor.putString("alarm", "0");
+	  editor.putString("music", "0");
+	  editor.putString("ring", "0");
+	  editor.putString("system", "0");
+	  editor.putString("voice", "0");
+
+
+
+
+	  editor.commit();
+
+	}
+}
+
+
+private void initBar(SeekBar bar, final int stream, final TextView txtv,final String dataName) {
+	
+	
+	
 	bar.setMax(mgr.getStreamMaxVolume(stream));
-	final String spget=pref.getString(dataName, null);
+spget=pref.getString(dataName, null);
 	
   bar.setProgress(Integer.parseInt(spget));
 
-	  Editor editor = pref.edit();	
-	  editor.putString(dataName, spget);
+	 
 
-  txtv.setText(" "+String.valueOf(mgr.getStreamVolume(stream)+"/"+String.valueOf(mgr.getStreamMaxVolume(stream))));  
-  editor.commit();
+  txtv.setText(spget+"/"+String.valueOf(mgr.getStreamMaxVolume(stream)));  
   
  
   bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
     public void onProgressChanged(SeekBar bar, int progress,
                                   boolean fromUser) {
-      mgr.setStreamVolume(stream, progress,
+      mgr.setStreamVolume(0, progress,
                           AudioManager.FLAG_PLAY_SOUND);
-  	SharedPreferences pref = getApplicationContext().getSharedPreferences(SharedPref, 0); 
-
+      pref = getApplicationContext().getSharedPreferences(SharedPref, 0);
       Editor editor = pref.edit();	
 
       editor.putString(dataName, String.valueOf(progress));
       editor.commit();
 
-      txtv.setText(String.valueOf(mgr.getStreamVolume(stream)+"/"+String.valueOf(mgr.getStreamMaxVolume(stream))));  
+      txtv.setText(String.valueOf(progress)+"/"+String.valueOf(mgr.getStreamMaxVolume(stream)));  
      
     }
     

@@ -3,6 +3,12 @@ package com.example.smartdring;
 
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +23,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -34,32 +41,44 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	AudioManager mgr=null;
-
+TextView testtxt;
 	TextView lb;
    ListView list1 ;
 	private List<SoundProfile> myCars = new ArrayList<SoundProfile>();
 	  SoundEdit e=new SoundEdit();
-
+		private List<String> profileName = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	       setContentView(R.layout.list);
- 
+
+	    
+
+
+
 		lb =(TextView)findViewById(R.id.label);
 	       list1 = (ListView) findViewById(R.id.list);
+	       readFromFile();
+	       
+       
+        for (int i=0;i<profileName.size();i++)
+        {
+        	SoundProfile g = new SoundProfile(profileName.get(i),profileName.get(i)+"spp");
+            myCars.add(g);
 
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-            "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-            "Linux", "OS/2" };
-        SoundProfile Silent=new SoundProfile("Silent","MyPref");
-        SoundProfile Normale=new SoundProfile("Normale","Pref3");
-        myCars.add(Silent);
-        myCars.add(Normale);
+        }
+        
+      
+        
         MainActivityAdapter adapter = new MainActivityAdapter(this, myCars);
         list1.setAdapter(adapter) ;
        getWindow().setBackgroundDrawableResource(R.drawable.img2);
        registerForContextMenu(list1);
        registerClickCallback();
+       testtxt =(TextView)findViewById(R.id.music);
+Toast.makeText(getApplicationContext(), readFromFile(),
+		   Toast.LENGTH_LONG).show();
+
 	}
 
 	@Override
@@ -101,10 +120,7 @@ public class MainActivity extends Activity {
           if (item.getTitle() == "Activer") {
         	  mgr=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
-        	  SharedPreferences pref1 = getApplicationContext().getSharedPreferences(myCars.get(info.position).getSharedPref(), MODE_WORLD_READABLE); 
-        		String spget=pref1.getString("alarm", null);
-        		 
-        		mgr.setStreamVolume(AudioManager.STREAM_ALARM, Integer.parseInt(spget), 0);
+        	 
 
         	  
           }
@@ -120,7 +136,48 @@ public class MainActivity extends Activity {
           return true;
 	  }
 	  
-	  
+	  private void writeToFile(String data) {
+		    try {
+		        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("config.txt", Context.MODE_APPEND));
+		        outputStreamWriter.write(data);
+		        outputStreamWriter.close();
+		    }
+		    catch (IOException e) {
+		        Log.e("Exception", "File write failed: " + e.toString());
+		    } 
+		}
+
+
+		private String readFromFile() {
+
+		    String ret = "";
+
+		    try {
+		        InputStream inputStream = openFileInput("config.txt");
+
+		        if ( inputStream != null ) {
+		            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+		            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+		            String receiveString = "";
+		            StringBuilder stringBuilder = new StringBuilder();
+
+		            while ( (receiveString = bufferedReader.readLine()) != null ) {
+		            	profileName.add(receiveString);
+		                
+		            }
+
+		            inputStream.close();
+		            ret = stringBuilder.toString();
+		        }
+		    }
+		    catch (FileNotFoundException e) {
+		        Log.e("login activity", "File not found: " + e.toString());
+		    } catch (IOException e) {
+		        Log.e("login activity", "Can not read file: " + e.toString());
+		    }
+
+		    return ret;
+		}
 	 
 		 }
 
