@@ -19,7 +19,7 @@ private	TextView testtxt;
 	private ListView list1;
 	private	Context e1 = this;
 	private SoundProfile InsSProfile = new SoundProfile(e1);
-	private SoundEdit e = new SoundEdit();
+	private SoundEdit e = new SoundEdit(e1);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ private	TextView testtxt;
 				.getMenuInfo();
 
 		if (item.getTitle() == "Activer") {
-
+e.activeProfile(InsSProfile.getProfilesNames().get(info.position).getSharedPref());
 		}
 
 		else if (item.getTitle() == "Delete") {
