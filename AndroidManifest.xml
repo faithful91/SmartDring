@@ -30,6 +30,10 @@
             android:name="com.example.smartdring.MainActivity1"
             android:label="@string/title_activity_main_activity1" >
         </activity>
+        <activity
+            android:name="com.example.smartdring.ScheduleList"
+            android:label="@string/title_activity_schedule_list" >
+        </activity>
     </application>
 
 </manifest>

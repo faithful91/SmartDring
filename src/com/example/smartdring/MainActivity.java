@@ -120,7 +120,9 @@ e.activeProfile(InsSProfile.getProfilesNames().get(info.position).getSharedPref(
 		
 		else if (item.getTitle() == "Programmer")
 		{
-	
+			Intent intent = new Intent(this, ScheduleList.class);
+			startActivity(intent);
+
 		}
 		
 		
