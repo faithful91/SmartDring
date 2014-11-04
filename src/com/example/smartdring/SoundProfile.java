@@ -47,7 +47,16 @@ public class SoundProfile {
 
 	public List<SoundProfile> getProfilesNames(){return Profiles;} 
 	
+	
 	public void loadProfiles() {
+
+
+writeToFile("Normale",0);
+
+    writeToFile(	       System.getProperty("line.separator"),0);
+
+
+
 		readFromFile();
 
 		for (int i = 0; i < profileName.size(); i++)

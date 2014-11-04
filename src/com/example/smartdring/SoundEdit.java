@@ -11,14 +11,10 @@ import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
-import android.provider.MediaStore.Audio;
 import android.util.Log;
-import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.net.Uri;
 
 public class SoundEdit extends Activity {
 	SeekBar alarm = null;
@@ -146,6 +142,7 @@ public SoundEdit(){}
 
 		bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
+			@Override
 			public void onProgressChanged(SeekBar bar, int progress,
 					boolean fromUser) {
 				mgr.setStreamVolume(0, progress, AudioManager.FLAG_PLAY_SOUND);
@@ -161,10 +158,12 @@ public SoundEdit(){}
 
 			}
 
+			@Override
 			public void onStartTrackingTouch(SeekBar bar) {
 				// no-op
 			}
 
+			@Override
 			public void onStopTrackingTouch(SeekBar bar) {
 				// no-op
 			}

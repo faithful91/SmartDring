@@ -8,7 +8,7 @@
 	<TextView 
 	android:layout_width="fill_parent" 
 	android:layout_height="wrap_content" 
-	android:id="@+id/textTitre"
+	android:id="@+id/profileId"
 	android:textStyle="bold"
 	android:textColor="#FFFFFFFF"
 	/>
@@ -16,14 +16,80 @@
 	<TextView 
 	android:layout_width="fill_parent" 
 	android:layout_height="wrap_content" 
-	android:id="@+id/TextDescription"
+	android:id="@+id/profileName"
 	/>
 	
 	<TextView 
 	android:layout_width="fill_parent" 
 	android:layout_height="wrap_content" 
-	android:id="@+id/TextCodeBarre"
+	android:id="@+id/profileHour"
 	android:textColor="#FF808080"
 	/>
+	
+	
+	<TextView 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/profileMinute"
+	android:textColor="#FF808080"
+	/>
+	
+	<TextView 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/profileState"
+	android:textColor="#FF808080"
+	/>
+	
+	<TextView 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/day0"
+	android:textColor="#FF808080"
+	/>
+	
+	<TextView 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/day1"
+	android:textColor="#FF808080"
+	/>
+	
+	<TextView 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/day2"
+	android:textColor="#FF808080"
+	/>
+	
+	<TextView 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/day3"
+	android:textColor="#FF808080"
+	/>
+	
+	<TextView 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/day4"
+	android:textColor="#FF808080"
+	/>
+	
+	<TextView 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/day5"
+	android:textColor="#FF808080"
+	/>
+	
+	<TextView 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/day6"
+	android:textColor="#FF808080"
+	/>
+	
+
 	
 </LinearLayout>

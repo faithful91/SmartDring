@@ -1,6 +1,15 @@
 package com.example.smartdring;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import schedules.Schedule;
+
+import dataBaseAdapters.DBAdapter;
+
+import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -13,23 +22,46 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class ScheduleList extends ListActivity implements OnClickListener {
+public class ScheduleList extends Activity  {
     /** Called when the activity is first created. */
 	
-	DBAdapter db;
-	
+		DBAdapter db;
+	 	public static final String db_table = "scheduleTable";
+	 	public static final String db_id= "_id";
+	    public static final String db_profileName = "profileName";
+	    public static final String db_startHour = "startHour";
+	    public static final String db_startMinute = "startMin";
+	    public static final String db_state = "state";
+	    public static final String db_day0 = "day0";
+	    public static final String db_day1 = "day1";
+	    public static final String db_day2 = "day2";
+	    public static final String db_day3 = "day3";
+	    public static final String db_day4 = "day4";
+	    public static final String db_day5 = "day5";
+	    public static final String db_day6 = "day6";
+		ListView ListSchedule;
+
+		public List<Schedule> Schedules = new ArrayList<Schedule>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_list);
-        getListView().setOnCreateContextMenuListener(this);
-        ((Button)findViewById(android.R.id.button1)).setOnClickListener(this);
+    	ListSchedule=(ListView)findViewById(R.id.list1);
         db = new DBAdapter(this);
         db.open();
-        DataBind();
+        ListScheduleAdapter adapter = new ListScheduleAdapter(this,
+				db.getAllSchedules());
+		ListSchedule.setAdapter(adapter);
+  
+    
+    
+    
+    
+    
+    
     }
     
     @Override // Cr�ation du menu principal
@@ -49,13 +81,7 @@ public class ScheduleList extends ListActivity implements OnClickListener {
     	return true;
     }
     
-	@Override // Selection d'un item de la liste
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		Cursor cursor = (Cursor)l.getAdapter().getItem(position);
-		String titre  = cursor.getString(cursor.getColumnIndex("titre"));
-		Toast.makeText(this,"Item id "+id+" : "+titre, Toast.LENGTH_SHORT).show();
-		super.onListItemClick(l, v, position, id);
-	}
+	
 	
 	@Override // Creation du menu contextuel
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
@@ -86,20 +112,13 @@ public class ScheduleList extends ListActivity implements OnClickListener {
     	super.onDestroy();
     }
     
-    public void DataBind(){
+	public void DataBind(){
     	Cursor c = db.recupererLaListeDesProduits();
     	startManagingCursor(c);
-    	SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-    	R.layout.list_schedule,c,new String[]{"titre","description","codebarre"},
-    	new int[]{R.id.textTitre,R.id.TextDescription,R.id.TextCodeBarre});
-    	setListAdapter(adapter);
-    }
+    	
+    	
+    	    }
 
-	@Override
-	public void onClick(View v) {
-		long num = SystemClock.currentThreadTimeMillis();
-		db.insererUnProduit(""+num, "Produit n�"+num, "Nouveau produit"+num);
-		DataBind();
-	}
+	
         
 }

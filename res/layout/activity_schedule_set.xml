@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/ScheduleType"
+        android:text="SystemVolumeSchedule"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="12.0sp"
+        android:textColor="#ff000000"
+        android:background="#ff888888" />
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+    
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+    
+                <ToggleButton
+                    android:id="@+id/day0toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textOn="day0"
+                    android:textOff="day0" />
+    
+                <ToggleButton
+                    android:id="@+id/day1toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textOn="day1"
+                    android:textOff="day1" />
+    
+                <ToggleButton
+                    android:id="@+id/day2toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textOn="day2"
+                    android:textOff="day2" />
+    
+                <ToggleButton
+                    android:id="@+id/day3toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textOn="day3"
+                    android:textOff="day3" />
+    
+                <ToggleButton
+                    android:id="@+id/day4toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textOn="day4"
+                    android:textOff="day4" />
+    
+                <ToggleButton
+                    android:id="@+id/day5toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textOn="day5"
+                    android:textOff="day5" />
+    
+                <ToggleButton
+                    android:id="@+id/day6toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="day6"
+                    android:textOff="day6" />
+    
+            </LinearLayout>
+    
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+    
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="volumeLabel" />
+                <SeekBar
+                    android:id="@+id/volume"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp" />
+    
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="startTimeLabel"/>
+                <TimePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/timePicker1"/>
+                    
+                <TableLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+    
+                    <TableRow>
+        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dip"
+                            android:id="@+id/vibrateLabel"
+                            android:text="vibrateLabel" />
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/vibrateCheckbox" />
+        
+                    </TableRow>
+        
+                    <TableRow>
+                            
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dip"
+                            android:text="activeLabel" />
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/activeCheckbox" />
+        
+                    </TableRow>
+            
+                    <Button
+                        android:id="@+id/doneButton"
+                        android:text="done"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" 
+                        android:layout_gravity="center_horizontal" />
+                
+                </TableLayout>
+    
+            </LinearLayout>
+    
+        </LinearLayout>
+    
+
+</LinearLayout>

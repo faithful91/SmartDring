@@ -1,16 +1,9 @@
 package com.example.smartdring;
 
-import java.util.Calendar;
-
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -28,17 +21,14 @@ private	TextView testtxt;
 	private	Context e1 = this;
 	private SoundProfile InsSProfile = new SoundProfile(e1);
 	private SoundEdit e = new SoundEdit(e1);
-	PendingIntent pi;
-	BroadcastReceiver br;
-	AlarmManager am;
-
+	
 	final static private long ONE_SECOND = 1000;
 	final static private long TWENTY_SECONDS = ONE_SECOND * 20;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list);
+		setContentView(R.layout.list_profile);
 
 		lb = (TextView) findViewById(R.id.label);
 		list1 = (ListView) findViewById(R.id.list);
@@ -47,12 +37,12 @@ private	TextView testtxt;
 
 		MainActivityAdapter adapter = new MainActivityAdapter(this,
 				InsSProfile.getProfilesNames());
+
 		list1.setAdapter(adapter);
 		getWindow().setBackgroundDrawableResource(R.drawable.img2);
 		registerForContextMenu(list1);
 		registerClickCallback();
 		testtxt = (TextView) findViewById(R.id.music);
-		setup();
 	}
 
 	@Override
@@ -89,6 +79,7 @@ private	TextView testtxt;
 		});
 	}
 
+	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
 				.getMenuInfo();
@@ -133,24 +124,5 @@ e.activeProfile(InsSProfile.getProfilesNames().get(info.position).getSharedPref(
 		}
 		return true;
 	}
-	private void setup() {
-		Calendar calendar = Calendar.getInstance();
-        calendar.getTime();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),   calendar.get(Calendar.DAY_OF_MONTH), 02, 30);
-        Log.e("TAG","Calendar: " +calendar.getTime());
-        br = new BroadcastReceiver() {
-            @Override
-			public void onReceive(Context c, Intent i) {
-				Toast.makeText(c, "Rise and Shine!", Toast.LENGTH_LONG).show();
-				Log.e("TAG", "File write failed: " );
-
-			}
-        };
-		registerReceiver(br, new IntentFilter("com.authorwjf.wakeywakey") );
-        pi = PendingIntent.getBroadcast( this, 0, new Intent("com.authorwjf.wakeywakey"), 0 );
-        am = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
-        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
-
-	}
-
+	
 }

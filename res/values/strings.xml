@@ -7,5 +7,6 @@
     <string name="title_activity_sound_edit">SoundEdit</string>
     <string name="title_activity_main_activity1">MainActivity1</string>
     <string name="title_activity_schedule_list">ScheduleList</string>
+    <string name="title_activity_schedule_set">ScheduleSet</string>
 
 </resources>
