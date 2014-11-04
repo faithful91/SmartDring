@@ -20,6 +20,8 @@ public class SoundProfile {
 	public List<SoundProfile> Profiles = new ArrayList<SoundProfile>();
 	public Context fileContext;
 
+	
+	
 	public SoundProfile(String Name, String SharedPref) {
 		this.Name = Name;
 		this.SharedPref = SharedPref;
@@ -28,6 +30,12 @@ public class SoundProfile {
 	public SoundProfile(Context fileContext) {
 		this.fileContext = fileContext;
 	}
+
+	public SoundProfile() {
+		// TODO Auto-generated constructor stub
+	}
+
+	
 
 	public String getName() {
 		return Name;

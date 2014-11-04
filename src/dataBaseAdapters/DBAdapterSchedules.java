@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-public class DBAdapter {
+public class DBAdapterSchedules {
     public static final String db_table = "schedulesTable";
 
     	public static final String db_id= "_id";
@@ -33,7 +33,7 @@ public class DBAdapter {
 	Context			context;
 	SQLiteDatabase	db;
 	
-	public DBAdapter(Context context){
+	public DBAdapterSchedules(Context context){
 		this.context = context;
 		DBHelper = new DatabaseHelper(context);
 	}	
@@ -75,7 +75,7 @@ public class DBAdapter {
 		
 	}
 	
-	public DBAdapter open(){
+	public DBAdapterSchedules open(){
 		db = DBHelper.getWritableDatabase();
 		return this;
 	}

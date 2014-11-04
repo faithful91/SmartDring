@@ -1,6 +1,11 @@
-package com.example.smartdring;
+package schedules;
 
 import java.util.Calendar;
+
+import com.example.smartdring.R;
+import com.example.smartdring.R.id;
+import com.example.smartdring.R.layout;
+import com.example.smartdring.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

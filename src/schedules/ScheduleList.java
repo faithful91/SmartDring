@@ -1,11 +1,14 @@
-package com.example.smartdring;
+package schedules;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import schedules.Schedule;
+import com.example.smartdring.R;
+import com.example.smartdring.R.id;
+import com.example.smartdring.R.layout;
 
-import dataBaseAdapters.DBAdapter;
+
+import dataBaseAdapters.DBAdapterSchedules;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -24,10 +27,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ScheduleList extends Activity  {
+public class ScheduleList extends Activity implements OnClickListener   {
     /** Called when the activity is first created. */
 	
-		DBAdapter db;
+		DBAdapterSchedules db;
 	 	public static final String db_table = "scheduleTable";
 	 	public static final String db_id= "_id";
 	    public static final String db_profileName = "profileName";
@@ -41,7 +44,7 @@ public class ScheduleList extends Activity  {
 	    public static final String db_day4 = "day4";
 	    public static final String db_day5 = "day5";
 	    public static final String db_day6 = "day6";
-		ListView ListSchedule;
+		ListView listSchedule;
 
 		public List<Schedule> Schedules = new ArrayList<Schedule>();
 
@@ -49,12 +52,13 @@ public class ScheduleList extends Activity  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_list);
-    	ListSchedule=(ListView)findViewById(R.id.list1);
-        db = new DBAdapter(this);
+        ((Button)findViewById(android.R.id.button1)).setOnClickListener(this);
+        listSchedule=(ListView)findViewById(R.id.list1);
+        db = new DBAdapterSchedules(this);
         db.open();
         ListScheduleAdapter adapter = new ListScheduleAdapter(this,
 				db.getAllSchedules());
-		ListSchedule.setAdapter(adapter);
+		listSchedule.setAdapter(adapter);
   
     
     
@@ -119,6 +123,13 @@ public class ScheduleList extends Activity  {
     	
     	    }
 
-	
+	public void onClick(View v) {
+		long num = SystemClock.currentThreadTimeMillis();
+		db.insererUnProduit("Silent",11, 11, "active", true, true, true, true,true,true,true);
+		
+		ListScheduleAdapter adapter = new ListScheduleAdapter(this,
+				db.getAllSchedules());
+		listSchedule.setAdapter(adapter);
+  	}
         
 }

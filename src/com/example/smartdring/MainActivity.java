@@ -1,5 +1,6 @@
 package com.example.smartdring;
 
+import schedules.ScheduleList;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -68,13 +69,7 @@ private	TextView testtxt;
 					int position, long id) {
 
 				viewClicked.showContextMenu();
-				SoundProfile clickedCar = InsSProfile.getProfilesNames().get(
-						position);
-
-				String message = "You clicked position "
-						+ " Which is car make " + clickedCar.getName();
-				Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG)
-						.show();
+				
 			}
 		});
 	}

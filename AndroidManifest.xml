@@ -31,11 +31,11 @@
             android:label="@string/title_activity_main_activity1" >
         </activity>
         <activity
-            android:name="com.example.smartdring.ScheduleList"
+            android:name="schedules.ScheduleList"
             android:label="@string/title_activity_schedule_list" >
         </activity>
         <activity
-            android:name="com.example.smartdring.ScheduleSet"
+            android:name="schedules.ScheduleSet"
             android:label="@string/title_activity_schedule_set" >
         </activity>
     </application>

@@ -1,7 +1,10 @@
-package com.example.smartdring;
+package schedules;
 import java.util.List;
 
-import schedules.Schedule;
+import com.example.smartdring.R;
+import com.example.smartdring.R.id;
+import com.example.smartdring.R.layout;
+
 
 import android.content.Context;
 import android.util.Log;
