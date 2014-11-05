@@ -34,10 +34,15 @@ public class SoundEdit extends Activity {
 	String spget = null;
 	private Handler handler;
 	private ContentObserver mVolumeObserver;
-	private Context c;
-public SoundEdit(Context c){this.c=c;}
-public SoundEdit(){}
-	
+	private Context c = this;
+
+	public SoundEdit(Context c) {
+		this.c = c;
+	}
+
+	public SoundEdit() {
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,52 +86,36 @@ public SoundEdit(){}
 
 	}
 
-	public void getAllPrefShared(String SharPref)
-	{
-		
-	}
-	
-	public void verifPrefSharedExist(String SharPref) {
+	public void verifPrefSharedExist(String SharedPref) {
+
 		String alarm = null;
 		String music = null;
 		String ring = null;
 		String system = null;
 		String voice = null;
-		File f = getDatabasePath(SharPref);
 
-		if (f != null) {
-			pref = getApplicationContext().getSharedPreferences(SharedPref, 0);
-			Editor editor = pref.edit();
-			alarm = pref.getString("alarm", null);
-			music = pref.getString("music", null);
-			ring = pref.getString("ring", null);
-			system = pref.getString("system", null);
-			voice = pref.getString("voice", null);
+		pref = c.getApplicationContext().getSharedPreferences(SharedPref, 0);
 
-			if (alarm == null)
-				editor.putString("alarm", "0");
-			if (music == null)
-				editor.putString("music", "0");
-			if (ring == null)
-				editor.putString("ring", "0");
-			if (system == null)
-				editor.putString("system", "0");
-			if (voice == null)
-				editor.putString("voice", "0");
+		Editor editor = pref.edit();
+		alarm = pref.getString("alarm", null);
+		music = pref.getString("music", null);
+		ring = pref.getString("ring", null);
+		system = pref.getString("system", null);
+		voice = pref.getString("voice", null);
 
-			editor.commit();
-
-		} else {
-			pref = getApplicationContext().getSharedPreferences(SharedPref, 0);
-			Editor editor = pref.edit();
+		if (alarm == null)
 			editor.putString("alarm", "0");
+		if (music == null)
 			editor.putString("music", "0");
+		if (ring == null)
 			editor.putString("ring", "0");
+		if (system == null)
 			editor.putString("system", "0");
-			editor.putString("voice", "0");
-			editor.commit();
+		if (voice == null)
+		{	editor.putString("voice", "0");
 
-		}
+		editor.commit();}
+
 	}
 
 	private void initBar(SeekBar bar, final int stream, final TextView txtv,
@@ -170,8 +159,6 @@ public SoundEdit(){}
 		});
 	}
 
-	
-
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -185,16 +172,17 @@ public SoundEdit(){}
 	}
 
 	public void activeProfile(String SPA) {
-		Log.e("TAG", "lol");
+		verifPrefSharedExist(SPA);
 		AudioManager mgr1 = null;
 
-		String alarm1 ;
-		String music1 ;
-		String ring1 = "20" ;
-		String system1 ;
-		String voice1 ;
-		
-		SharedPreferences pref1 = c.getApplicationContext().getSharedPreferences(SPA, 1);
+		String alarm1;
+		String music1;
+		String ring1 ;
+		String system1;
+		String voice1;
+
+		SharedPreferences pref1 = c.getApplicationContext()
+				.getSharedPreferences(SPA, 1);
 
 		alarm1 = pref1.getString("alarm", null);
 
@@ -209,12 +197,16 @@ public SoundEdit(){}
 
 		mgr1 = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
 
-		
-		mgr1.setStreamVolume(AudioManager.STREAM_RING, Integer.parseInt(ring1) , AudioManager.ADJUST_LOWER);
-		mgr1.setStreamVolume(AudioManager.STREAM_ALARM, Integer.parseInt(alarm1) , AudioManager.FLAG_PLAY_SOUND);
-		mgr1.setStreamVolume(AudioManager.STREAM_VOICE_CALL, Integer.parseInt(voice1) , AudioManager.FLAG_PLAY_SOUND);
-		mgr1.setStreamVolume(AudioManager.STREAM_SYSTEM, Integer.parseInt(system1) , AudioManager.FLAG_PLAY_SOUND);
-		mgr1.setStreamVolume(AudioManager.STREAM_MUSIC, Integer.parseInt(music1) , AudioManager.FLAG_PLAY_SOUND);
+		mgr1.setStreamVolume(AudioManager.STREAM_RING, Integer.parseInt(ring1),
+				AudioManager.ADJUST_LOWER);
+		mgr1.setStreamVolume(AudioManager.STREAM_ALARM,
+				Integer.parseInt(alarm1), AudioManager.FLAG_PLAY_SOUND);
+		mgr1.setStreamVolume(AudioManager.STREAM_VOICE_CALL,
+				Integer.parseInt(voice1), AudioManager.FLAG_PLAY_SOUND);
+		mgr1.setStreamVolume(AudioManager.STREAM_SYSTEM,
+				Integer.parseInt(system1), AudioManager.FLAG_PLAY_SOUND);
+		mgr1.setStreamVolume(AudioManager.STREAM_MUSIC,
+				Integer.parseInt(music1), AudioManager.FLAG_PLAY_SOUND);
 
 	}
 

@@ -1,28 +1,34 @@
 package com.example.smartdring;
 
+import dataBaseAdapters.DBAdapterProfiles;
 import schedules.ScheduleList;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-private	TextView testtxt;
+	private TextView testtxt;
 	private TextView lb;
 	private ListView list1;
-	private	Context e1 = this;
-	private SoundProfile InsSProfile = new SoundProfile(e1);
-	private SoundEdit e = new SoundEdit(e1);
-	
+	private Context context = this;
+	private SoundProfile InsSProfile = new SoundProfile(context);
+	private SoundEdit e = new SoundEdit(context);
+	DBAdapterProfiles db;
 	final static private long ONE_SECOND = 1000;
 	final static private long TWENTY_SECONDS = ONE_SECOND * 20;
 
@@ -30,20 +36,18 @@ private	TextView testtxt;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_profile);
-
-		lb = (TextView) findViewById(R.id.label);
 		list1 = (ListView) findViewById(R.id.list);
-
-		InsSProfile.loadProfiles();
-
-		MainActivityAdapter adapter = new MainActivityAdapter(this,
-				InsSProfile.getProfilesNames());
-
-		list1.setAdapter(adapter);
 		getWindow().setBackgroundDrawableResource(R.drawable.img2);
-		registerForContextMenu(list1);
-		registerClickCallback();
-		testtxt = (TextView) findViewById(R.id.music);
+		db = new DBAdapterProfiles(this);
+		db.open();
+
+			MainActivityAdapter adapter = new MainActivityAdapter(this,
+					db.getAllProfiles());
+
+			list1.setAdapter(adapter);
+			registerForContextMenu(list1);
+			registerClickCallback();
+		
 	}
 
 	@Override
@@ -52,7 +56,7 @@ private	TextView testtxt;
 		super.onCreateContextMenu(menu, v, menuInfo);
 		if (v.getId() == R.id.list) {
 			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-			menu.setHeaderTitle(InsSProfile.getProfilesNames()
+			menu.setHeaderTitle(db.getAllProfiles()
 					.get(info.position).getName());
 		}
 		menu.add("Activer");
@@ -61,6 +65,7 @@ private	TextView testtxt;
 		menu.add("Delete");
 	}
 
+	// afficher contextuel menu avec un simple click
 	private void registerClickCallback() {
 		ListView list = (ListView) findViewById(R.id.list);
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,7 +74,7 @@ private	TextView testtxt;
 					int position, long id) {
 
 				viewClicked.showContextMenu();
-				
+
 			}
 		});
 	}
@@ -80,44 +85,103 @@ private	TextView testtxt;
 				.getMenuInfo();
 
 		if (item.getTitle() == "Activer") {
-e.activeProfile(InsSProfile.getProfilesNames().get(info.position).getSharedPref());
+			Intent intent = new Intent(this, SoundEdit.class);
+			intent.putExtra("sp",
+					db.getAllProfiles().get(info.position)
+					.getName());
+			
+			e.activeProfile(db.getAllProfiles().get(info.position)
+					.getName());
+
 		}
 
 		else if (item.getTitle() == "Delete") {
 
-			InsSProfile.delete(InsSProfile.getProfilesNames()
+			db.deleteProfile(db.getAllProfiles()
 					.get(info.position).getName());
-			InsSProfile.getProfilesNames().remove(
-					InsSProfile.getProfilesNames().get(info.position));
-			list1.invalidateViews();
+			MainActivityAdapter adapter = new MainActivityAdapter(this,
+					db.getAllProfiles());
+
+			list1.setAdapter(adapter);
+			
 
 		} else if (item.getTitle() == "Modifier") {
 			Toast.makeText(
 					getApplicationContext(),
-					InsSProfile.getProfilesNames().get(info.position).getName(),
+					db.getAllProfiles().get(info.position).getName(),
 					Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(this, SoundEdit.class);
 			intent.putExtra("sp",
-					InsSProfile.getProfilesNames().get(info.position)
-							.getSharedPref());
+					db.getAllProfiles().get(info.position)
+					.getName());
 			startActivity(intent);
-		} 
-		
-		
-		else if (item.getTitle() == "Programmer")
-		{
+		}
+
+		else if (item.getTitle() == "Programmer") {
 			Intent intent = new Intent(this, ScheduleList.class);
 			startActivity(intent);
 
 		}
-		
-		
-		
 
 		else {
 			return false;
 		}
 		return true;
 	}
-	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu items for use in the action bar
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main_activity_actions, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+
+		switch (item.getItemId()) {
+		case R.id.add_profile:
+			final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+			final EditText input = new EditText(this);
+			alert.setTitle("Entre profile name");
+
+			alert.setView(input);
+			alert.setPositiveButton("Ok",
+					new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,
+						int whichButton) {
+					String value = input.getText().toString().trim();
+					db.addProfile(value);
+
+					MainActivityAdapter adapter = new MainActivityAdapter(
+							context, db.getAllProfiles());
+
+					list1.setAdapter(adapter);
+
+					Toast.makeText(getApplicationContext(), value,
+							Toast.LENGTH_SHORT).show();
+				}
+			});
+
+			alert.setNegativeButton("Cancel",
+					new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,
+						int whichButton) {
+					dialog.cancel();
+				}
+			});
+			alert.show();
+			return true;
+		case R.id.action_settings:
+
+			Toast.makeText(getApplicationContext(),
+					"this is my Toasetiingst message!!! =)", Toast.LENGTH_LONG)
+					.show();
+
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 }

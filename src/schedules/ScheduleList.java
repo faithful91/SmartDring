@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.smartdring.R;
+import com.example.smartdring.SoundEdit;
 import com.example.smartdring.R.id;
 import com.example.smartdring.R.layout;
 
@@ -61,71 +62,83 @@ public class ScheduleList extends Activity implements OnClickListener   {
 		listSchedule.setAdapter(adapter);
   
     
-    
+		registerForContextMenu(listSchedule);
+		registerClickCallback();
     
     
     
     
     }
+    private void registerClickCallback() {
+		ListView list = (ListView) findViewById(R.id.list1);
+		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View viewClicked,
+					int position, long id) {
+
+				viewClicked.showContextMenu();
+
+			}
+		});
+	}
+
+    public boolean onContextItemSelected(MenuItem item) {
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
+
+		if (item.getTitle() == "Scheduling")
+			{
+			Intent intent = new Intent(this, ScheduleSet.class);
+			intent.putExtra("sp",
+					db.getAllSchedules().get(info.position)
+					.getProfileName());
+			startActivity(intent);
+
+			}
+
+		else if (item.getTitle() == "Delete")
+			{
+			db.deleteSchedule(db.getAllSchedules()
+					.get(info.position).getProfileName());
+			ListScheduleAdapter adapter = new ListScheduleAdapter(this,
+					db.getAllSchedules());
+			listSchedule.setAdapter(adapter);
+			}
+		else {
+			return false;
+		}
+		return true;
+	}
+
+    
+    
+    public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		if (v.getId() == R.id.list) {
+			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+			menu.setHeaderTitle(db.getAllSchedules()
+					.get(info.position).getProfileName());
+		}
+		menu.add("Scheduling");
+		menu.add("Delete");
+	}
     
     @Override // Cr�ation du menu principal
     public boolean onCreateOptionsMenu(Menu menu) {    	
     	menu.add(0,100,0,"Tout effacer");
     	return true;
     }
-    
-    @Override // Selection d'un item du menu
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	switch(item.getItemId()){
-    	case 100: 
-    		db.Truncate();
-    		DataBind();
-    		break;    	
-    	}
-    	return true;
-    }
-    
-	
-	
-	@Override // Creation du menu contextuel
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.setHeaderTitle("Action");
-		menu.add(0,100,0,"Supprimer");
-		menu.add(0,200,1,"Editer");
-	}
-    
-	@Override // Selection d'un item du menu contextuel
-	public boolean onContextItemSelected(MenuItem item) {
-		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-		switch(item.getItemId()){
-		case 100:
-			db.supprimerProduit(info.id);
-			DataBind();
-			break;
-		case 200:
-			Toast.makeText(this, "TODO", Toast.LENGTH_SHORT).show();				
-			break;			
-		}
-		return true;
-	}
-	
+ 	
     @Override
     protected void onDestroy() {
     	db.close();
     	super.onDestroy();
     }
     
-	public void DataBind(){
-    	Cursor c = db.recupererLaListeDesProduits();
-    	startManagingCursor(c);
-    	
-    	
-    	    }
-
-	public void onClick(View v) {
+    public void onClick(View v) {
 		long num = SystemClock.currentThreadTimeMillis();
-		db.insererUnProduit("Silent",11, 11, "active", true, true, true, true,true,true,true);
+		db.addSchedule("Silent",11, 11, "active", true, true, true, true,true,true,true);
 		
 		ListScheduleAdapter adapter = new ListScheduleAdapter(this,
 				db.getAllSchedules());

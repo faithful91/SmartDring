@@ -7,6 +7,8 @@ import com.example.smartdring.R.id;
 import com.example.smartdring.R.layout;
 import com.example.smartdring.R.menu;
 
+import dataBaseAdapters.DBAdapterProfiles;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -18,7 +20,9 @@ import android.content.IntentFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -30,16 +34,32 @@ public class ScheduleSet extends Activity {
 	PendingIntent pi;
 	BroadcastReceiver br;
 	AlarmManager am;
-
+	Spinner listProfileSpinner;
+	DBAdapterProfiles db;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_schedule_set);
+		db=new DBAdapterProfiles(this);
+        db.open();
 		timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
 		doneButton = (Button) findViewById(R.id.doneButton);
-
+		//getNameProfiletoLoad
+		Intent iin = getIntent();
+		Bundle b = iin.getExtras();
+		String ProfileName = (String) b.get("sp");
+		
+		//Spinner
+		listProfileSpinner=(Spinner)findViewById(R.id.listProfileSpinner);
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        android.R.layout.simple_spinner_item, db.getAllProfilesForSpinner());
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        listProfileSpinner.setAdapter(dataAdapter);
 
 		
+        Toast.makeText(getApplicationContext(), ProfileName,
+        Toast.LENGTH_LONG).show();
+
 
 Button.OnClickListener buttonDoneClickListener= new Button.OnClickListener(){
 

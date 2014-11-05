@@ -88,7 +88,7 @@ public class DBAdapterSchedules {
 		db.execSQL("DELETE FROM schedulesTable");
 	}
 	
-	public long insererUnProduit(String profileName,int startHour,int startMinute,String state,
+	public long addSchedule(String profileName,int startHour,int startMinute,String state,
 			boolean day0,boolean day1,boolean day2,boolean day3,boolean day4,boolean day5,boolean day6
 								)
 	{	
@@ -108,8 +108,8 @@ public class DBAdapterSchedules {
 	}
 	
 	
-	public boolean supprimerProduit(long profileName){
-		return db.delete("schedulesTable", db_profileName+"="+profileName, null)>0;
+	public boolean deleteSchedule(String profileName){
+		return db.delete(db_table, ""+db_profileName+"="+"'"+profileName+"'", null)>0;
 	}
 	
 	public Cursor recupererLaListeDesProduits(){
@@ -156,4 +156,5 @@ public class DBAdapterSchedules {
       
          return scheduleList;
      }
+
 }
