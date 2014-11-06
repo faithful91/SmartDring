@@ -2,6 +2,7 @@ package com.example.smartdring;
 
 import dataBaseAdapters.DBAdapterProfiles;
 import schedules.ScheduleList;
+import schedules.ScheduleSet;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -60,8 +61,9 @@ public class MainActivity extends Activity {
 					.get(info.position).getName());
 		}
 		menu.add("Activer");
-		menu.add("Programmer");
+		menu.add("Schedule");
 		menu.add("Modifier");
+		menu.add("ShedulesList");
 		menu.add("Delete");
 	}
 
@@ -117,10 +119,20 @@ public class MainActivity extends Activity {
 			startActivity(intent);
 		}
 
-		else if (item.getTitle() == "Programmer") {
-			Intent intent = new Intent(this, ScheduleList.class);
+		else if (item.getTitle() == "Schedule") {
+			Intent intent = new Intent(this, ScheduleSet.class);
+			intent.putExtra("sp",
+					db.getAllProfiles().get(info.position)
+					.getName());
+			intent.putExtra("callVar",
+					"NewProg");
 			startActivity(intent);
-
+		}
+		
+		else if (item.getTitle() == "ShedulesList") {
+			Intent intent = new Intent(this, ScheduleList.class);
+			
+			startActivity(intent);
 		}
 
 		else {

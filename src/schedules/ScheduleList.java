@@ -92,14 +92,16 @@ public class ScheduleList extends Activity implements OnClickListener   {
 			intent.putExtra("sp",""+
 					db.getAllSchedules().get(info.position)
 					.getId());
+			intent.putExtra("callVar","OldProg");
+					
 			startActivity(intent);
 
 			}
 
 		else if (item.getTitle() == "Delete")
 			{
-			db.deleteSchedule(db.getAllSchedules()
-					.get(info.position).getProfileName());
+			db.deleteSchedule(""+db.getAllSchedules()
+					.get(info.position).getId());
 			ListScheduleAdapter adapter = new ListScheduleAdapter(this,
 					db.getAllSchedules());
 			listSchedule.setAdapter(adapter);

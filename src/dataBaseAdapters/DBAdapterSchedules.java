@@ -108,33 +108,17 @@ public class DBAdapterSchedules {
 	}
 	
 	
-	public boolean deleteSchedule(String profileName){
-		return db.delete(db_table, ""+db_profileName+"="+"'"+profileName+"'", null)>0;
+	public boolean deleteSchedule(String profileId){
+		return db.delete(db_table, ""+db_id+"="+"'"+profileId+"'", null)>0;
 	}
 	
-	public Cursor recupererLaListeDesProduits(){
-		return db.query("schedulesTable", new String[]{
-				db_id,
-				db_profileName,
-				db_startHour,
-				db_startMinute,
-				db_state,
-				db_day0,
-				db_day1,
-				db_day2,
-				db_day3,
-				db_day4,
-				db_day5,
-				db_day6}, null, null, null, null, null);
-	}
+	
 	 public List<Schedule> getAllSchedules() {
          List<Schedule> scheduleList = new ArrayList<Schedule>();
-         // Select All Query
          String selectQuery = "SELECT  * FROM " + db_table;
       
          Cursor cursor = db.rawQuery(selectQuery, null);
       
-         // looping through all rows and adding to list
          if (cursor.moveToFirst()) {
              do {
                  Schedule schedule = new Schedule();
@@ -185,7 +169,7 @@ public class DBAdapterSchedules {
          	}
 		 	  return schedule;}
 					
-	 public void saveSchedulePrefInDB(Schedule schedule) 
+	 public void saveOldSchedulePrefInDB(Schedule schedule) 
 		{    
 
 		 String profileIdInit=""+schedule.getId();
@@ -216,7 +200,39 @@ public class DBAdapterSchedules {
 
 			db.update(db_table, values, "_id "+"="+profileIdInit, null);
 
-}
+			}
+	 
+	 public void saveNewSchedulePrefInDB(Schedule schedule) 
+		{    
+
+		 String profileIdInit=""+schedule.getId();
+		 String profileNamex=""+schedule.getProfileName();
+		 String profileHour=""+schedule.getProfileHour();
+		 String profileMinute=""+schedule.getProfileMinute();
+		 String profileState=schedule.getState();
+		 String day0=""+schedule.getDay0();
+		 String day1=""+schedule.getDay1();
+		 String day2=""+schedule.getDay2();
+		 String day3=""+schedule.getDay3();
+		 String day4=""+schedule.getDay4();
+		 String day5=""+schedule.getDay5();
+		 String day6=""+schedule.getDay6();
+
+			ContentValues values = new ContentValues();
+			values.put(db_profileName, profileNamex);
+			values.put(db_startHour, profileHour);
+			values.put(db_startMinute, profileMinute);
+			values.put(db_state, profileState);
+			values.put(db_day0, day0);
+			values.put(db_day1, day1);
+			values.put(db_day2, day2);
+			values.put(db_day3, day3);
+			values.put(db_day4, day4);
+			values.put(db_day5, day5);
+			values.put(db_day6, day6);
+
+			db.insert("schedulesTable", null, values);
+			}
 				
 
 

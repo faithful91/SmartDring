@@ -51,6 +51,7 @@ public class ScheduleSet extends Activity implements OnClickListener{
 	Button doneButton;
 	Switch state;
 	String profileId ;
+	String whoCallMe;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {	   
 
@@ -78,13 +79,15 @@ public class ScheduleSet extends Activity implements OnClickListener{
 		Intent iin = getIntent();
 		Bundle b = iin.getExtras();
 		profileId = (String) b.get("sp");
+		whoCallMe = (String) b.get("callVar");
+
 		
 		listProfileSpinner=(Spinner)findViewById(R.id.listProfileSpinner);
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_spinner_item, dbProfile.getAllProfilesForSpinner());
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         listProfileSpinner.setAdapter(dataAdapter);
-        
+        if(whoCallMe.equals("OldProg"))
         loadSchedulePref(profileId);
         
 
@@ -152,15 +155,9 @@ public class ScheduleSet extends Activity implements OnClickListener{
 	        			
 	        }
 
-		  
-
-
-		  
-		
 	}
 	//sauvegarder les changements en appuyant sur done
-	public Schedule saveSchedule(String profileId)
-	 	
+	public Schedule saveOldSchedule(String profileId)
 		{	
 		  int profileIdinit=dbSchedule.getSchedulePref(profileId).getId();	
 		  String profileNamex=listProfileSpinner.getSelectedItem().toString();
@@ -180,10 +177,35 @@ public class ScheduleSet extends Activity implements OnClickListener{
 		  
 		  return schedule;
 		}
+	
+	public Schedule saveNewSchedule()
+	{	
+	  int profileIdinit;
+	  profileIdinit=0;
+	  String profileNamex=listProfileSpinner.getSelectedItem().toString();
+
+	  int profileHour=timePicker1.getCurrentHour();
+	  int profileMinute=timePicker1.getCurrentMinute();
+	  String stateinit;
+	  if (state.isChecked()==true)stateinit="active"; else stateinit="desactive";
+	  boolean day0=day0toggle.isChecked();
+	  boolean day1=day1toggle.isChecked();
+	  boolean day2=day2toggle.isChecked();
+	  boolean day3=day3toggle.isChecked();
+	  boolean day4=day4toggle.isChecked();
+	  boolean day5=day5toggle.isChecked();
+	  boolean day6=day6toggle.isChecked();
+	  Schedule schedule =new Schedule(profileIdinit,profileNamex,profileHour,profileMinute,stateinit,day0,day1,day2,day3,day4,day5,day6);
+	  
+	  return schedule;
+	}
 
 	@Override
 	public void onClick(View arg0) {
-		dbSchedule.saveSchedulePrefInDB(saveSchedule(profileId));
+        if(whoCallMe.equals("OldProg"))
+        	dbSchedule.saveOldSchedulePrefInDB(saveOldSchedule(profileId));
+        else         	dbSchedule.saveNewSchedulePrefInDB(saveNewSchedule());
+
 		
 	}
 }
