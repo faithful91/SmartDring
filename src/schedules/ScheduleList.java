@@ -86,12 +86,12 @@ public class ScheduleList extends Activity implements OnClickListener   {
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
 				.getMenuInfo();
 
-		if (item.getTitle() == "Scheduling")
+		if (item.getTitle() == "Edit")
 			{
 			Intent intent = new Intent(this, ScheduleSet.class);
-			intent.putExtra("sp",
+			intent.putExtra("sp",""+
 					db.getAllSchedules().get(info.position)
-					.getProfileName());
+					.getId());
 			startActivity(intent);
 
 			}
@@ -120,7 +120,7 @@ public class ScheduleList extends Activity implements OnClickListener   {
 			menu.setHeaderTitle(db.getAllSchedules()
 					.get(info.position).getProfileName());
 		}
-		menu.add("Scheduling");
+		menu.add("Edit");
 		menu.add("Delete");
 	}
     
@@ -138,7 +138,7 @@ public class ScheduleList extends Activity implements OnClickListener   {
     
     public void onClick(View v) {
 		long num = SystemClock.currentThreadTimeMillis();
-		db.addSchedule("Silent",11, 11, "active", true, true, true, true,true,true,true);
+		db.addSchedule("Fort",11, 11, "active", true, true, true, true,true,true,true);
 		
 		ListScheduleAdapter adapter = new ListScheduleAdapter(this,
 				db.getAllSchedules());

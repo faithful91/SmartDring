@@ -14,9 +14,9 @@ public class Schedule {
     private boolean day5;
     private boolean day6;
   
-    public Schedule(int id,String nameProfile, int profileHour, int profileMinute, 
+    public Schedule(int id,String profileName, int profileHour, int profileMinute, 
     		String state,boolean day0, boolean day1, boolean day2, boolean day3, boolean day4, boolean day5,
-                    boolean day6, String profileName) 
+                    boolean day6) 
     {
         this.id = id;
         this.profileName = profileName;

@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-public class DBAdapterSchedules {
+public class DBAdapterScheduleSet {
     public static final String db_table = "schedulesTable";
 
     	public static final String db_id= "_id";
@@ -33,7 +33,7 @@ public class DBAdapterSchedules {
 	Context			context;
 	SQLiteDatabase	db;
 	
-	public DBAdapterSchedules(Context context){
+	public DBAdapterScheduleSet(Context context){
 		this.context = context;
 		DBHelper = new DatabaseHelper(context);
 	}	
@@ -75,7 +75,7 @@ public class DBAdapterSchedules {
 		
 	}
 	
-	public DBAdapterSchedules open(){
+	public DBAdapterScheduleSet open(){
 		db = DBHelper.getWritableDatabase();
 		return this;
 	}
@@ -155,72 +155,6 @@ public class DBAdapterSchedules {
          }
       
          return scheduleList;
-         
      }
-	 
-	 public Schedule getSchedulePref(String ScheduleId) 
-	 		{
-         // Select All Query
-         String selectQuery = "SELECT  * FROM " + db_table+" WHERE _id="+ScheduleId;
-         Schedule schedule = null;
-         Cursor cursor = db.rawQuery(selectQuery, null);
-      
-         if (cursor.moveToFirst()) {
-             do {
-            	 schedule = new Schedule();
-                 schedule.setId(Integer.parseInt(cursor.getString(0)));
-                 schedule.setProfileName(cursor.getString(1));
-                 schedule.setProfileHour(Integer.parseInt(cursor.getString(2)));
-                 schedule.setProfileMinute(Integer.parseInt(cursor.getString(3)));
-                 schedule.setState(cursor.getString(4));
-                 schedule.setDay0(Boolean.valueOf(cursor.getString(5)));
-                 schedule.setDay1(Boolean.valueOf(cursor.getString(6)));
-                 schedule.setDay2(Boolean.valueOf(cursor.getString(7)));
-                 schedule.setDay3(Boolean.valueOf(cursor.getString(8)));
-                 schedule.setDay4(Boolean.valueOf(cursor.getString(9)));
-                 schedule.setDay5(Boolean.valueOf(cursor.getString(10)));
-                 schedule.setDay6(Boolean.valueOf(cursor.getString(11)));
-             } while (cursor.moveToNext());
-              return schedule;
-         	}
-		 	  return schedule;}
-					
-	 public void saveSchedulePrefInDB(Schedule schedule) 
-		{    
-
-		 String profileIdInit=""+schedule.getId();
-		 String profileNamex=""+schedule.getProfileName();
-		 String profileHour=""+schedule.getProfileHour();
-		 String profileMinute=""+schedule.getProfileMinute();
-		 String profileState=schedule.getState();
-		 String day0=""+schedule.getDay0();
-		 String day1=""+schedule.getDay1();
-		 String day2=""+schedule.getDay2();
-		 String day3=""+schedule.getDay3();
-		 String day4=""+schedule.getDay4();
-		 String day5=""+schedule.getDay5();
-		 String day6=""+schedule.getDay6();
-
-			ContentValues values = new ContentValues();
-			values.put(db_profileName, profileNamex);
-			values.put(db_startHour, profileHour);
-			values.put(db_startMinute, profileMinute);
-			values.put(db_state, profileState);
-			values.put(db_day0, day0);
-			values.put(db_day1, day1);
-			values.put(db_day2, day2);
-			values.put(db_day3, day3);
-			values.put(db_day4, day4);
-			values.put(db_day5, day5);
-			values.put(db_day6, day6);
-
-			db.update(db_table, values, "_id "+"="+profileIdInit, null);
 
 }
-				
-
-
-}	
-
-
-		

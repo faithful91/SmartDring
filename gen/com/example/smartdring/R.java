@@ -34,6 +34,7 @@ public final class R {
         public static final int LinearLayout01=0x7f080010;
         public static final int RelativeLayout01=0x7f080000;
         public static final int ScheduleType=0x7f080004;
+        public static final int State=0x7f08000e;
         public static final int action_settings=0x7f08002c;
         public static final int add_profile=0x7f08002b;
         public static final int alarm=0x7f080011;
@@ -64,7 +65,6 @@ public final class R {
         public static final int musictxtv=0x7f080014;
         public static final int profileHour=0x7f08001f;
         public static final int profileId=0x7f08001d;
-        public static final int profileList=0x7f08000e;
         public static final int profileMinute=0x7f080020;
         public static final int profileName=0x7f08001e;
         public static final int profileState=0x7f080021;
@@ -73,7 +73,7 @@ public final class R {
         public static final int system=0x7f080017;
         public static final int systemtxtv=0x7f080018;
         public static final int test=0x7f08001b;
-        public static final int timePicker1=0x7f08000d;
+        public static final int timePicker=0x7f08000d;
         public static final int voice=0x7f080019;
         public static final int voicetxtv=0x7f08001a;
     }
