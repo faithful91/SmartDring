@@ -13,6 +13,7 @@ public class Schedule {
     private boolean day4;
     private boolean day5;
     private boolean day6;
+    private String idEv;
   
     public Schedule(int id,String profileName, int profileHour, int profileMinute, 
     		String state,boolean day0, boolean day1, boolean day2, boolean day3, boolean day4, boolean day5,
@@ -169,7 +170,16 @@ public class Schedule {
         this.day6 = day6;
     }
 
+    public String getIdEv() 
+    {
+    	return idEv;
+    }
     
+    
+    public void setIdEv(String idEv) 
+    {
+        this.idEv = idEv;
+    }
    
 
 

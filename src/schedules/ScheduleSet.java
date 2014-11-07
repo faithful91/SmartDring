@@ -2,6 +2,8 @@ package schedules;
 
 import java.util.Calendar;
 
+import services.TestService;
+
 import com.example.smartdring.R;
 import com.example.smartdring.R.id;
 import com.example.smartdring.R.layout;
@@ -195,6 +197,7 @@ public class ScheduleSet extends Activity implements OnClickListener{
 	  boolean day4=day4toggle.isChecked();
 	  boolean day5=day5toggle.isChecked();
 	  boolean day6=day6toggle.isChecked();
+	  
 	  Schedule schedule =new Schedule(profileIdinit,profileNamex,profileHour,profileMinute,stateinit,day0,day1,day2,day3,day4,day5,day6);
 	  
 	  return schedule;
@@ -202,6 +205,10 @@ public class ScheduleSet extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View arg0) {
+		Intent service = new Intent(this, TestService.class);
+		service.putExtra("eventDel", "");
+
+		this.startService(service);
         if(whoCallMe.equals("OldProg"))
         	dbSchedule.saveOldSchedulePrefInDB(saveOldSchedule(profileId));
         else         	dbSchedule.saveNewSchedulePrefInDB(saveNewSchedule());

@@ -3,6 +3,8 @@ package schedules;
 import java.util.ArrayList;
 import java.util.List;
 
+import services.TestService;
+
 import com.example.smartdring.R;
 import com.example.smartdring.SoundEdit;
 import com.example.smartdring.R.id;
@@ -17,6 +19,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -100,11 +103,16 @@ public class ScheduleList extends Activity implements OnClickListener   {
 
 		else if (item.getTitle() == "Delete")
 			{
-			db.deleteSchedule(""+db.getAllSchedules()
-					.get(info.position).getId());
-			ListScheduleAdapter adapter = new ListScheduleAdapter(this,
-					db.getAllSchedules());
+			
+			String idEv=db.getAllSchedules().get(info.position).getIdEv();
+			Intent service = new Intent(this, TestService.class);
+			service.putExtra("eventDel", ""+idEv);
+			db.deleteSchedule(""+db.getAllSchedules().get(info.position).getId());
+			ListScheduleAdapter adapter = new ListScheduleAdapter(this,db.getAllSchedules());
 			listSchedule.setAdapter(adapter);
+			if (!(idEv==null))
+			this.startService(service);
+
 			}
 		else {
 			return false;

@@ -31,12 +31,13 @@ public final class R {
         public static final int plus=0x7f020007;
     }
     public static final class id {
+        public static final int IdEv=0x7f080029;
         public static final int LinearLayout01=0x7f080010;
         public static final int RelativeLayout01=0x7f080000;
         public static final int ScheduleType=0x7f080004;
         public static final int State=0x7f08000e;
-        public static final int action_settings=0x7f08002c;
-        public static final int add_profile=0x7f08002b;
+        public static final int action_settings=0x7f08002d;
+        public static final int add_profile=0x7f08002c;
         public static final int alarm=0x7f080011;
         public static final int alarmtxtv=0x7f080012;
         public static final int day0=0x7f080022;
@@ -53,9 +54,9 @@ public final class R {
         public static final int day5toggle=0x7f08000a;
         public static final int day6=0x7f080028;
         public static final int day6toggle=0x7f08000b;
-        public static final int delete=0x7f08002a;
+        public static final int delete=0x7f08002b;
         public static final int doneButton=0x7f08000f;
-        public static final int edit=0x7f080029;
+        public static final int edit=0x7f08002a;
         public static final int icon=0x7f080001;
         public static final int label=0x7f080002;
         public static final int list=0x7f08001c;

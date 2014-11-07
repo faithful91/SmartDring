@@ -28,6 +28,7 @@ public class DBAdapterSchedules {
 	    public static final String db_day4 = "day4";
 	    public static final String db_day5 = "day5";
 	    public static final String db_day6 = "day6";
+	    public static final String db_id_ev= "idEv";
 
 	DatabaseHelper	DBHelper;
 	Context			context;
@@ -62,7 +63,8 @@ public class DBAdapterSchedules {
 		            + db_day3 + " integer not null default 0, "
 		            + db_day4 + " integer not null default 0, "
 		            + db_day5 + " integer not null default 0, "
-		            + db_day6 + " integer not null default 0 "
+		            + db_day6 + " integer not null default 0, "
+		            + db_id_ev + " text"
 		            +");");			
 		}
 
@@ -134,6 +136,8 @@ public class DBAdapterSchedules {
                  schedule.setDay4(Boolean.valueOf(cursor.getString(9)));
                  schedule.setDay5(Boolean.valueOf(cursor.getString(10)));
                  schedule.setDay6(Boolean.valueOf(cursor.getString(11)));
+                 schedule.setIdEv(cursor.getString(12));
+
                  scheduleList.add(schedule);
              } while (cursor.moveToNext());
          }
@@ -235,8 +239,54 @@ public class DBAdapterSchedules {
 			}
 				
 
+public List<Schedule>  getActiveSchedules()
+	{
+    List<Schedule> scheduleActiveList = new ArrayList<Schedule>();
 
+    Schedule schedule = null;
+
+	 String selectQuery = "SELECT  * FROM " + db_table+" Where "+db_state+"="+"'"+"active"+"'";
+     Cursor cursor = db.rawQuery(selectQuery, null);
+     if (cursor.moveToFirst()) {
+         do {
+        	 schedule = new Schedule();
+             schedule.setId(Integer.parseInt(cursor.getString(0)));
+             schedule.setProfileName(cursor.getString(1));
+             schedule.setProfileHour(Integer.parseInt(cursor.getString(2)));
+             schedule.setProfileMinute(Integer.parseInt(cursor.getString(3)));
+             schedule.setState(cursor.getString(4));
+             schedule.setDay0(Boolean.valueOf(cursor.getString(5)));
+             schedule.setDay1(Boolean.valueOf(cursor.getString(6)));
+             schedule.setDay2(Boolean.valueOf(cursor.getString(7)));
+             schedule.setDay3(Boolean.valueOf(cursor.getString(8)));
+             schedule.setDay4(Boolean.valueOf(cursor.getString(9)));
+             schedule.setDay5(Boolean.valueOf(cursor.getString(10)));
+             schedule.setDay6(Boolean.valueOf(cursor.getString(11)));
+             scheduleActiveList.add(schedule);
+         } while (cursor.moveToNext());
+	}
+	return scheduleActiveList;
 }	
+
+
+	public void addIdEvInDb(int iddb,int iddbev)
+	{	
+		 String selectQuery = "SELECT  * FROM " + db_table+" Where "+db_id+"="+"'"+iddb+"'";
+	     Cursor cursor = db.rawQuery(selectQuery, null);
+
+		 if (cursor.moveToFirst()) {
+	         do {
+
+	 			ContentValues values = new ContentValues();
+	 			
+	 			values.put(db_id_ev, ""+iddbev);
+
+				db.update(db_table, values, "_id "+"="+iddb, null);
+
+	         	} while (cursor.moveToNext());
+		 }
+	}
+}
 
 
 		

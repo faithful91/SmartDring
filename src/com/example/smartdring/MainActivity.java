@@ -3,6 +3,7 @@ package com.example.smartdring;
 import dataBaseAdapters.DBAdapterProfiles;
 import schedules.ScheduleList;
 import schedules.ScheduleSet;
+import services.TestService;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -48,6 +49,9 @@ public class MainActivity extends Activity {
 			list1.setAdapter(adapter);
 			registerForContextMenu(list1);
 			registerClickCallback();
+			
+
+			
 		
 	}
 

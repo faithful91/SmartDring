@@ -127,34 +127,6 @@ public class DBAdapterScheduleSet {
 				db_day5,
 				db_day6}, null, null, null, null, null);
 	}
-	 public List<Schedule> getAllSchedules() {
-         List<Schedule> scheduleList = new ArrayList<Schedule>();
-         // Select All Query
-         String selectQuery = "SELECT  * FROM " + db_table;
-      
-         Cursor cursor = db.rawQuery(selectQuery, null);
-      
-         // looping through all rows and adding to list
-         if (cursor.moveToFirst()) {
-             do {
-                 Schedule schedule = new Schedule();
-                 schedule.setId(Integer.parseInt(cursor.getString(0)));
-                 schedule.setProfileName(cursor.getString(1));
-                 schedule.setProfileHour(Integer.parseInt(cursor.getString(2)));
-                 schedule.setProfileMinute(Integer.parseInt(cursor.getString(3)));
-                 schedule.setState(cursor.getString(4));
-                 schedule.setDay0(Boolean.valueOf(cursor.getString(5)));
-                 schedule.setDay1(Boolean.valueOf(cursor.getString(6)));
-                 schedule.setDay2(Boolean.valueOf(cursor.getString(7)));
-                 schedule.setDay3(Boolean.valueOf(cursor.getString(8)));
-                 schedule.setDay4(Boolean.valueOf(cursor.getString(9)));
-                 schedule.setDay5(Boolean.valueOf(cursor.getString(10)));
-                 schedule.setDay6(Boolean.valueOf(cursor.getString(11)));
-                 scheduleList.add(schedule);
-             } while (cursor.moveToNext());
-         }
-      
-         return scheduleList;
-     }
+	
 
 }
