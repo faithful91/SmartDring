@@ -1,144 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/ScheduleType"
-        android:text="SystemVolumeSchedule"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="#ff888888"
         android:gravity="center_horizontal"
-        android:textSize="12.0sp"
+        android:text="SystemVolumeSchedule"
         android:textColor="#ff000000"
-        android:background="#ff888888" />
-
+        android:textSize="12.0sp" />
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-        
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ToggleButton
+                android:id="@+id/day0toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textOff="Sun"
+                android:textOn="Sun" />
+
+            <ToggleButton
+                android:id="@+id/day1toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textOff="Mon"
+                android:textOn="Mon" />
+
+            <ToggleButton
+                android:id="@+id/day2toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textOff="Tues"
+                android:textOn="Tues" />
+
+            <ToggleButton
+                android:id="@+id/day3toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textOff="Thir"
+                android:textOn="Thir" />
+
+            <ToggleButton
+                android:id="@+id/day4toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textOff="day4"
+                android:textOn="day4" />
+
+            <ToggleButton
+                android:id="@+id/day5toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textOff="day5"
+                android:textOn="day5" />
+
+            <ToggleButton
+                android:id="@+id/day6toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOff="day6"
+                android:textOn="day6" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
-    
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-    
-                <ToggleButton
-                    android:id="@+id/day0toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:textOn="day0"
-                    android:textOff="day0" />
-    
-                <ToggleButton
-                    android:id="@+id/day1toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:textOn="day1"
-                    android:textOff="day1" />
-    
-                <ToggleButton
-                    android:id="@+id/day2toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:textOn="day2"
-                    android:textOff="day2" />
-    
-                <ToggleButton
-                    android:id="@+id/day3toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:textOn="day3"
-                    android:textOff="day3" />
-    
-                <ToggleButton
-                    android:id="@+id/day4toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:textOn="day4"
-                    android:textOff="day4" />
-    
-                <ToggleButton
-                    android:id="@+id/day5toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:textOn="day5"
-                    android:textOff="day5" />
-    
-                <ToggleButton
-                    android:id="@+id/day6toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textOn="day6"
-                    android:textOff="day6" />
-    
-            </LinearLayout>
-    
-            <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+            <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-    
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Profile" />
+                android:text="Profile"
+                android:textColor="#FFFFFFFF" />
 
-                <Spinner
-                    android:id="@+id/listProfileSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-    
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="StartTime"/>
-                <TimePicker
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/timePicker"/>
-                    
-                <TableLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-    
-                    
-        
-                    <TableRow>
+            <Spinner
+                android:id="@+id/listProfileSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFFFF" />
 
-                        <Switch
-                            android:id="@+id/State"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="State" />
-        
-                    </TableRow>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="StartTime"
+                android:textColor="#FFFFFFFF" />
 
-                    <Button
-                        android:id="@+id/doneButton"
-                        android:layout_width="fill_parent"
+            <TimePicker
+                android:id="@+id/timePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TableRow>
+
+                    <Switch
+                        android:id="@+id/State"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Done" />
-                
-                </TableLayout>
-    
-            </LinearLayout>
-    
+                        android:text="State"
+                        android:textColor="#FFFFFFFF" />
+                        />
+                </TableRow>
+
+                <Button
+                    android:id="@+id/doneButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:textColor="#FFFFFFFF" />
+            </TableLayout>
         </LinearLayout>
-    
+    </LinearLayout>
 
 </LinearLayout>

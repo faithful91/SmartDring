@@ -1,7 +1,5 @@
 package com.example.smartdring;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -111,10 +109,11 @@ public class SoundEdit extends Activity {
 			editor.putString("ring", "0");
 		if (system == null)
 			editor.putString("system", "0");
-		if (voice == null)
-		{	editor.putString("voice", "0");
+		if (voice == null) {
+			editor.putString("voice", "0");
 
-		editor.commit();}
+			editor.commit();
+		}
 
 	}
 
@@ -177,7 +176,7 @@ public class SoundEdit extends Activity {
 
 		String alarm1;
 		String music1;
-		String ring1 ;
+		String ring1;
 		String system1;
 		String voice1;
 

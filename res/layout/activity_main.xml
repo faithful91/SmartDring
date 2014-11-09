@@ -20,15 +20,14 @@
 
     </ImageView>
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/icon"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="27.23"
-        android:text="@+id/label"
-        android:textSize="40px" 
-        android:textColor="#FFFFFF"/>
-
+   <TextView
+       android:id="@+id/label"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignTop="@+id/icon"
+       android:layout_centerHorizontal="true"
+       android:layout_weight="27.23"
+       android:text="@+id/label"
+       android:textColor="#FFFFFF"
+       android:textSize="40px" />
 </RelativeLayout>

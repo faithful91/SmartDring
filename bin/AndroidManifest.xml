@@ -28,7 +28,13 @@
             android:enabled="true"
             android:exported="true" >
         </service>
-
+          <service
+            android:name="services.ChangeVolume"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <receiver android:name="receivers.SoundTimer" />
+          
         <receiver
             android:name="receivers.BootStartUpReciever"
             android:enabled="true"

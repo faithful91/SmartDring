@@ -3,14 +3,12 @@ package com.example.smartdring;
 import dataBaseAdapters.DBAdapterProfiles;
 import schedules.ScheduleList;
 import schedules.ScheduleSet;
-import services.TestService;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -43,16 +41,13 @@ public class MainActivity extends Activity {
 		db = new DBAdapterProfiles(this);
 		db.open();
 
-			MainActivityAdapter adapter = new MainActivityAdapter(this,
-					db.getAllProfiles());
+		MainActivityAdapter adapter = new MainActivityAdapter(this,
+				db.getAllProfiles());
 
-			list1.setAdapter(adapter);
-			registerForContextMenu(list1);
-			registerClickCallback();
-			
+		list1.setAdapter(adapter);
+		registerForContextMenu(list1);
+		registerClickCallback();
 
-			
-		
 	}
 
 	@Override
@@ -61,8 +56,8 @@ public class MainActivity extends Activity {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		if (v.getId() == R.id.list) {
 			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-			menu.setHeaderTitle(db.getAllProfiles()
-					.get(info.position).getName());
+			menu.setHeaderTitle(db.getAllProfiles().get(info.position)
+					.getName());
 		}
 		menu.add("Activer");
 		menu.add("Schedule");
@@ -92,50 +87,46 @@ public class MainActivity extends Activity {
 
 		if (item.getTitle() == "Activer") {
 			Intent intent = new Intent(this, SoundEdit.class);
-			intent.putExtra("sp",
-					db.getAllProfiles().get(info.position)
+			intent.putExtra("sp", db.getAllProfiles().get(info.position)
 					.getName());
-			
-			e.activeProfile(db.getAllProfiles().get(info.position)
-					.getName());
+
+			e.activeProfile(db.getAllProfiles().get(info.position).getName());
 
 		}
 
 		else if (item.getTitle() == "Delete") {
 
-			db.deleteProfile(db.getAllProfiles()
-					.get(info.position).getName());
+			db.deleteProfile(db.getAllProfiles().get(info.position).getName());
 			MainActivityAdapter adapter = new MainActivityAdapter(this,
 					db.getAllProfiles());
 
 			list1.setAdapter(adapter);
-			
 
 		} else if (item.getTitle() == "Modifier") {
-			Toast.makeText(
-					getApplicationContext(),
+			Toast.makeText(getApplicationContext(),
 					db.getAllProfiles().get(info.position).getName(),
 					Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(this, SoundEdit.class);
-			intent.putExtra("sp",
-					db.getAllProfiles().get(info.position)
+			intent.putExtra("sp", db.getAllProfiles().get(info.position)
 					.getName());
 			startActivity(intent);
 		}
 
 		else if (item.getTitle() == "Schedule") {
 			Intent intent = new Intent(this, ScheduleSet.class);
-			intent.putExtra("sp",
-					db.getAllProfiles().get(info.position)
+			intent.putExtra("sp", db.getAllProfiles().get(info.position)
 					.getName());
-			intent.putExtra("callVar",
-					"NewProg");
+			intent.putExtra("callVar", "NewProg");
+			intent.putExtra("profile", db.getAllProfiles().get(info.position)
+					.getName());
+			;
+
 			startActivity(intent);
 		}
-		
+
 		else if (item.getTitle() == "ShedulesList") {
 			Intent intent = new Intent(this, ScheduleList.class);
-			
+
 			startActivity(intent);
 		}
 
@@ -165,28 +156,28 @@ public class MainActivity extends Activity {
 			alert.setView(input);
 			alert.setPositiveButton("Ok",
 					new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,
-						int whichButton) {
-					String value = input.getText().toString().trim();
-					db.addProfile(value);
+						public void onClick(DialogInterface dialog,
+								int whichButton) {
+							String value = input.getText().toString().trim();
+							db.addProfile(value);
 
-					MainActivityAdapter adapter = new MainActivityAdapter(
-							context, db.getAllProfiles());
+							MainActivityAdapter adapter = new MainActivityAdapter(
+									context, db.getAllProfiles());
 
-					list1.setAdapter(adapter);
+							list1.setAdapter(adapter);
 
-					Toast.makeText(getApplicationContext(), value,
-							Toast.LENGTH_SHORT).show();
-				}
-			});
+							Toast.makeText(getApplicationContext(), value,
+									Toast.LENGTH_SHORT).show();
+						}
+					});
 
 			alert.setNegativeButton("Cancel",
 					new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,
-						int whichButton) {
-					dialog.cancel();
-				}
-			});
+						public void onClick(DialogInterface dialog,
+								int whichButton) {
+							dialog.cancel();
+						}
+					});
 			alert.show();
 			return true;
 		case R.id.action_settings:

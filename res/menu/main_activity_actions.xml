@@ -1,11 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <!-- Search, should appear as action button -->
-    <item android:id="@+id/add_profile"
-          android:icon="@drawable/plus"
-          android:title="@string/hello_world"
-          android:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/add_profile"
+        android:icon="@drawable/plus"
+        android:showAsAction="ifRoom"
+        android:title="@string/hello_world"/>
     <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
-          android:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+
 </menu>

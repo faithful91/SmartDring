@@ -20,8 +20,6 @@ public class SoundProfile {
 	public List<SoundProfile> Profiles = new ArrayList<SoundProfile>();
 	public Context fileContext;
 
-	
-	
 	public SoundProfile(String Name, String SharedPref) {
 		this.Name = Name;
 		this.SharedPref = SharedPref;
@@ -34,8 +32,6 @@ public class SoundProfile {
 	public SoundProfile() {
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	public String getName() {
 		return Name;
@@ -53,17 +49,15 @@ public class SoundProfile {
 		this.SharedPref = SharedPref;
 	}
 
-	public List<SoundProfile> getProfilesNames(){return Profiles;} 
-	
-	
+	public List<SoundProfile> getProfilesNames() {
+		return Profiles;
+	}
+
 	public void loadProfiles() {
 
+		writeToFile("Normale", 0);
 
-writeToFile("Normale",0);
-
-    writeToFile(	       System.getProperty("line.separator"),0);
-
-
+		writeToFile(System.getProperty("line.separator"), 0);
 
 		readFromFile();
 
@@ -111,7 +105,7 @@ writeToFile("Normale",0);
 			} catch (IOException e) {
 				Log.e("TAG", "File write failed: " + e.toString());
 			}
-try {
+			try {
 				inputStream.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -124,7 +118,8 @@ try {
 	public void delete(String data) {
 		for (int i = 0; i < profileName.size(); i++) {
 			if (!profileName.get(i).equals(data))
-				profileNameDel.add(profileName.get(i));}
+				profileNameDel.add(profileName.get(i));
+		}
 		writeToFile("", Context.MODE_PRIVATE);
 
 		for (int j = 0; j < profileNameDel.size(); j++) {
