@@ -14,7 +14,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SoundEdit extends Activity {
+public class ProfileSet extends Activity {
 	SeekBar alarm = null;
 	SeekBar music = null;
 	SeekBar ring = null;
@@ -34,11 +34,11 @@ public class SoundEdit extends Activity {
 	private ContentObserver mVolumeObserver;
 	private Context c = this;
 
-	public SoundEdit(Context c) {
+	public ProfileSet(Context c) {
 		this.c = c;
 	}
 
-	public SoundEdit() {
+	public ProfileSet() {
 	}
 
 	@Override

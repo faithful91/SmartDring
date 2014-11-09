@@ -3,7 +3,7 @@ package dataBaseAdapters;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.smartdring.SoundProfile;
+import com.example.smartdring.Profile;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -87,15 +87,15 @@ public class DBAdapterProfiles {
 				null, null);
 	}
 
-	public List<SoundProfile> getAllProfiles() {
-		List<SoundProfile> soundProfilesList = new ArrayList<SoundProfile>();
+	public List<Profile> getAllProfiles() {
+		List<Profile> soundProfilesList = new ArrayList<Profile>();
 		// Select All Query
 		String selectQuery = "SELECT  * FROM " + db_table;
 		Cursor cursor = db.rawQuery(selectQuery, null);
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				SoundProfile soundProfile = new SoundProfile();
+				Profile soundProfile = new Profile();
 				soundProfile.setName(cursor.getString(1));
 				soundProfilesList.add(soundProfile);
 			} while (cursor.moveToNext());

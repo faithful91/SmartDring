@@ -22,15 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	private TextView testtxt;
-	private TextView lb;
 	private ListView list1;
 	private Context context = this;
-	private SoundProfile InsSProfile = new SoundProfile(context);
-	private SoundEdit e = new SoundEdit(context);
+	private ProfileSet e = new ProfileSet(context);
 	DBAdapterProfiles db;
-	final static private long ONE_SECOND = 1000;
-	final static private long TWENTY_SECONDS = ONE_SECOND * 20;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +81,7 @@ public class MainActivity extends Activity {
 				.getMenuInfo();
 
 		if (item.getTitle() == "Activer") {
-			Intent intent = new Intent(this, SoundEdit.class);
+			Intent intent = new Intent(this, ProfileSet.class);
 			intent.putExtra("sp", db.getAllProfiles().get(info.position)
 					.getName());
 
@@ -106,7 +101,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(getApplicationContext(),
 					db.getAllProfiles().get(info.position).getName(),
 					Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(this, SoundEdit.class);
+			Intent intent = new Intent(this, ProfileSet.class);
 			intent.putExtra("sp", db.getAllProfiles().get(info.position)
 					.getName());
 			startActivity(intent);

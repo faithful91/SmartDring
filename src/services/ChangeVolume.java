@@ -2,7 +2,7 @@ package services;
 
 import java.util.Calendar;
 
-import com.example.smartdring.SoundEdit;
+import com.example.smartdring.ProfileSet;
 
 import schedules.Schedule;
 
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class ChangeVolume extends Service {
 	DBAdapterSchedules dbSchedule;
-	SoundEdit e=new SoundEdit(this); 
+	ProfileSet e=new ProfileSet(this); 
 	public ChangeVolume() {
 	}
 

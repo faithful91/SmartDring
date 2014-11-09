@@ -11,25 +11,25 @@ import java.util.List;
 import android.content.Context;
 import android.util.Log;
 
-public class SoundProfile {
+public class Profile {
 
 	private String Name;
 	private String SharedPref;
 	private List<String> profileName = new ArrayList<String>();
 	private List<String> profileNameDel = new ArrayList<String>();
-	public List<SoundProfile> Profiles = new ArrayList<SoundProfile>();
+	public List<Profile> Profiles = new ArrayList<Profile>();
 	public Context fileContext;
 
-	public SoundProfile(String Name, String SharedPref) {
+	public Profile(String Name, String SharedPref) {
 		this.Name = Name;
 		this.SharedPref = SharedPref;
 	}
 
-	public SoundProfile(Context fileContext) {
+	public Profile(Context fileContext) {
 		this.fileContext = fileContext;
 	}
 
-	public SoundProfile() {
+	public Profile() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -49,7 +49,7 @@ public class SoundProfile {
 		this.SharedPref = SharedPref;
 	}
 
-	public List<SoundProfile> getProfilesNames() {
+	public List<Profile> getProfilesNames() {
 		return Profiles;
 	}
 
@@ -64,7 +64,7 @@ public class SoundProfile {
 		for (int i = 0; i < profileName.size(); i++)
 
 		{
-			SoundProfile g = new SoundProfile(profileName.get(i),
+			Profile g = new Profile(profileName.get(i),
 					profileName.get(i) + "sp");
 			Profiles.add(g);
 		}

@@ -10,11 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivityAdapter extends ArrayAdapter<SoundProfile> {
+public class MainActivityAdapter extends ArrayAdapter<Profile> {
 	private final Context context;
-	private final List<SoundProfile> profileList;
+	private final List<Profile> profileList;
 
-	public MainActivityAdapter(Context context, List<SoundProfile> profileList) {
+	public MainActivityAdapter(Context context, List<Profile> profileList) {
 		super(context, R.layout.activity_main, profileList);
 		this.context = context;
 		this.profileList = profileList;

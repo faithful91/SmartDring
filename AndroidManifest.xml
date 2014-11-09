@@ -46,7 +46,7 @@
             </intent-filter>
         </receiver>
         <activity
-            android:name="com.example.smartdring.SoundEdit"
+            android:name="com.example.smartdring.ProfileSet"
             android:label="@string/title_activity_sound_edit" >
         </activity>
         <activity
