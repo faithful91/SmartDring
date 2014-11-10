@@ -6,17 +6,30 @@
     android:background="@drawable/img2" >
 
     <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
         android:stretchColumns="1" >
+
+        <TableRow
+           
+             >
+
+            <TextView
+                android:text="Alarme"
+                android:textColor="#FFFFFF"
+                             />
+                
+        </TableRow>
 
         <TableRow
             android:paddingBottom="20px"
             android:paddingTop="10px" >
 
-            <TextView
-                android:text="Alarm:"
-                android:textColor="#FFFFFF" />
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/alarm" />
 
             <SeekBar
                 android:id="@+id/alarm"
@@ -27,12 +40,27 @@
                 android:id="@+id/alarmtxtv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text="" 
+                                android:textColor="#FFFFFF"
+                />
+        </TableRow>
+
+        <TableRow
+            android:paddingBottom="20px"
+            android:paddingTop="10px" >
+
+            <TextView
+                android:text="Musique"
+                android:textColor="#FFFFFF" />
         </TableRow>
 
         <TableRow android:paddingBottom="20px" >
 
-            <TextView android:text="Music:" />
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/music" />
 
             <SeekBar
                 android:id="@+id/music"
@@ -43,12 +71,27 @@
                 android:id="@+id/musictxtv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView" 
+                                android:textColor="#FFFFFF"
+                />
         </TableRow>
 
-        <TableRow android:paddingBottom="20px" >
+        <TableRow
+            android:paddingBottom="20px"
+            android:paddingTop="10px" >
 
-            <TextView android:text="Ring:" />
+            <TextView
+                android:text="Sonnerie"
+                android:textColor="#FFFFFF" />
+        </TableRow>
+
+        <TableRow>
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ring" />
 
             <SeekBar
                 android:id="@+id/ring"
@@ -59,12 +102,27 @@
                 android:id="@+id/ringtxtv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                                android:textColor="#FFFFFF"
+                 />
+        </TableRow>
+
+        <TableRow
+            android:paddingBottom="20px"
+            android:paddingTop="10px" >
+
+            <TextView
+                android:text="Système"
+                android:textColor="#FFFFFF" />
         </TableRow>
 
         <TableRow android:paddingBottom="20px" >
 
-            <TextView android:text="System:" />
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/system" />
 
             <SeekBar
                 android:id="@+id/system"
@@ -75,12 +133,27 @@
                 android:id="@+id/systemtxtv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                                android:textColor="#FFFFFF"
+                 />
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:paddingBottom="20px"
+            android:paddingTop="10px" >
 
-            <TextView android:text="Voice:" />
+            <TextView
+                android:text="Appel vocal"
+                android:textColor="#FFFFFF" />
+        </TableRow>
+
+        <TableRow android:paddingBottom="20px" >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/voice" />
 
             <SeekBar
                 android:id="@+id/voice"
@@ -91,14 +164,10 @@
                 android:id="@+id/voicetxtv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView" 
+                                android:textColor="#FFFFFF"
+                />
         </TableRow>
-
-        <TextView
-            android:id="@+id/test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
     </TableLayout>
 
 </LinearLayout>

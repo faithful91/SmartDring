@@ -3,7 +3,7 @@ package dataBaseAdapters;
 import java.util.ArrayList;
 import java.util.List;
 
-import schedules.Schedule;
+import schedule.Schedule;
 
 import android.content.ContentValues;
 import android.content.Context;

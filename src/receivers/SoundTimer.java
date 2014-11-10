@@ -1,6 +1,6 @@
 package receivers;
 
-import services.ChangeVolume;
+import services.ChangeVolumeService;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ public class SoundTimer extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		Bundle b = intent.getExtras();
 		String profileId = (String) b.get("za3ma");
-		Intent i = new Intent(context, ChangeVolume.class);
+		Intent i = new Intent(context, ChangeVolumeService.class);
 		i.putExtra("zozo", profileId);
 		context.startService(i);
 	}

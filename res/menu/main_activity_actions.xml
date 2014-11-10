@@ -8,8 +8,9 @@
         android:title="@string/hello_world"/>
     <!-- Settings, should always be in the overflow -->
     <item
-        android:id="@+id/action_settings"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/time"
+        android:icon="@drawable/time"
+        android:showAsAction="ifRoom"
+        android:title="@string/hello_world"/>
 
 </menu>

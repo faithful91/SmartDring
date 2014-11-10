@@ -3,7 +3,8 @@ package dataBaseAdapters;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.smartdring.Profile;
+
+import profile.Profile;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;

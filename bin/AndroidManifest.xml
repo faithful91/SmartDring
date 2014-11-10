@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.smartdring.MainActivity"
+            android:name="profile.ProfileList"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +24,12 @@
             </intent-filter>
         </activity>
          <service
-            android:name="services.TestService"
+            android:name="services.SchedeleService"
             android:enabled="true"
             android:exported="true" >
         </service>
           <service
-            android:name="services.ChangeVolume"
+            android:name="services.ChangeVolumeService"
             android:enabled="true"
             android:exported="true" >
         </service>
@@ -46,19 +46,19 @@
             </intent-filter>
         </receiver>
         <activity
-            android:name="com.example.smartdring.ProfileSet"
+            android:name="profile.ProfileSet"
             android:label="@string/title_activity_sound_edit" >
         </activity>
         <activity
-            android:name="com.example.smartdring.MainActivity1"
+            android:name="profile.MainActivity1"
             android:label="@string/title_activity_main_activity1" >
         </activity>
         <activity
-            android:name="schedules.ScheduleList"
+            android:name="schedule.ScheduleList"
             android:label="@string/title_activity_schedule_list" >
         </activity>
         <activity
-            android:name="schedules.ScheduleSet"
+            android:name="schedule.ScheduleSet"
             android:label="@string/title_activity_schedule_set" >
         </activity>
         
