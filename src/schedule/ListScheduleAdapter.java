@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.smartdring.R;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,12 @@ public class ListScheduleAdapter extends ArrayAdapter<Schedule> {
 		profileName.setText(values.get(position).getProfileName());
 		profileHour.setText("" + values.get(position).getProfileHour());
 		profileMinute.setText("" + values.get(position).getProfileMinute());
-		state.setText(values.get(position).getState());
+		String stateS=(values.get(position).getState());
+		
+		if(stateS.equals("active"))
+			{state.setText("Activé");state.setTextColor(Color.GREEN);}
+			else 		{state.setText("Désactivé");state.setTextColor(Color.GRAY);}
+		
 		D0="" + values.get(position).getDay0();
 		D1="" + values.get(position).getDay1();
 		D2="" + values.get(position).getDay2();
@@ -66,32 +72,32 @@ public class ListScheduleAdapter extends ArrayAdapter<Schedule> {
 
 		
 		if(D0.equals("true"))
-		day0.setText("On");
-		else 		day0.setText("Off");
+		{day0.setText("Lun");day0.setTextColor(Color.GRAY);}
+		else 		day0.setText("");
 		
 		if(D1.equals("true"))
-			day1.setText("On");
-			else 		day1.setText("Off");
+			{day1.setText("Mar");day1.setTextColor(Color.GRAY);}
+			else 		day1.setText("");
 		
 		if(D2.equals("true"))
-			day2.setText("On");
-			else 		day2.setText("Off");
+			{day2.setText("Mer");day2.setTextColor(Color.GRAY);}
+			else 		day2.setText("");
 		
 		if(D3.equals("true"))
-			day3.setText("On");
-			else 		day3.setText("Off");
+			{day3.setText("Jeu");day3.setTextColor(Color.GRAY);}
+			else 		day3.setText("");
 		
 		if(D4.equals("true"))
-			day4.setText("On");
-			else 		day4.setText("Off");
+			{day4.setText("Ven");day4.setTextColor(Color.GRAY);}
+			else 		day4.setText("");
 		
 		if(D5.equals("true"))
-			day5.setText("On");
-			else 		day5.setText("Off");
+			{day5.setText("Sam");day5.setTextColor(Color.GRAY);}
+			else 		day5.setText("");
 		
 		if(D6.equals("true"))
-			day6.setText("On");
-			else 		day6.setText("Off");
+			{day6.setText("Dim");day6.setTextColor(Color.GRAY);}
+			else 		day6.setText("");
 
 	//	idEv.setText("" + values.get(position).getIdEv());
 		day3.setPadding(2, 2, 2, 2);

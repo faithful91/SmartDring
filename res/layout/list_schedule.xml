@@ -7,199 +7,108 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-       >
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/profileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                       android:textSize="25sp"
-           
-            android:textColor="#FFFFFFFF" />
+            android:textColor="#FFFFFFFF"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/profileHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="120dp"
-            android:textColor="#FFFFFFFF" 
-                        android:textSize="25sp"
-            />
+            android:textColor="#FFFFFFFF"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/a:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="148dp"
-                        android:textColor="#FFFFFFFF" 
-                        android:textSize="25sp"
-            
-            android:text=":" />
+            android:text=":"
+            android:textColor="#FFFFFFFF"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/profileMinute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="155dp"
-            android:textColor="#FFFFFFFF" 
-            android:textSize="25sp"
-            />
+            android:textColor="#FFFFFFFF"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/profileState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFFFF" 
             android:layout_marginLeft="210dp"
-                        android:textSize="25sp"
-            
-            />
+            android:textColor="#FFFFFFFF"
+            android:textSize="25sp" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-         >
-    
-        
-        <TextView
-            android:id="@+id/day00"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFFFF" 
-            android:textSize="15sp"
-            android:text="Lun"/>
-        
-        <TextView
-            android:id="@+id/day11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="55dp"
-            android:textColor="#FFFFFFFF" 
-            android:textSize="15sp"
-            android:text="Mar"/>
-        
-         <TextView
-            android:id="@+id/day22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="105dp"
-            android:textColor="#FFFFFFFF" 
-            android:textSize="15sp"
-            android:text="Mer"/>
-         
-         <TextView
-            android:id="@+id/day33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="155dp"
-            android:textColor="#FFFFFFFF" 
-            android:textSize="15sp"
-            android:text="Jeu"/>
-         <TextView
-            android:id="@+id/day33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="205dp"
-            android:textColor="#FFFFFFFF" 
-            android:textSize="15sp"
-            android:text="Ven"/>
-         <TextView
-            android:id="@+id/day33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="255dp"
-            android:textColor="#FFFFFFFF" 
-            android:textSize="15sp"
-            android:text="Sam"/>
-         
-         <TextView
-            android:id="@+id/day33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="315dp"
-            android:textColor="#FFFFFFFF" 
-            android:textSize="15sp"
-            android:text="Dim"/>
-                  </RelativeLayout>
-         
-        <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="horizontal" >
-        
-            <TextView
-        android:id="@+id/day0"
-            android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFFFF"
-                   
-                    android:textSize="15sp"
-                    
-                    
-                    
-                    
-        />
 
-    <TextView
-        android:id="@+id/day1"
+        <TextView
+            android:id="@+id/day0"
             android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFFFF"
-                    android:layout_marginLeft="60dp"
-                    android:textSize="15sp"
-                    
-        
-         />
-    
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/day2"
+        <TextView
+            android:id="@+id/day1"
             android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFFFF" 
-           android:layout_marginLeft="110dp"
-                    android:textSize="15sp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/day3"
+        <TextView
+            android:id="@+id/day2"
             android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFFFF"
-           android:layout_marginLeft="160dp"
-                    android:textSize="15sp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/day4"
+        <TextView
+            android:id="@+id/day3"
             android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFFFF" 
-           android:layout_marginLeft="210dp"
-                    android:textSize="15sp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/day5"
+        <TextView
+            android:id="@+id/day4"
             android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFFFF"
-           android:layout_marginLeft="260dp"
-                    android:textSize="15sp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/day6"
+        <TextView
+            android:id="@+id/day5"
             android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFFFF" 
-           android:layout_marginLeft="320dp"
-                    android:textSize="15sp"/>
-        
-        
-          </RelativeLayout>
-          
-         
-             
-        
-   
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/day6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="185dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
 </LinearLayout>

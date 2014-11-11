@@ -16,7 +16,7 @@
         android:layout_marginLeft="4px"
         android:layout_marginRight="10px"
         android:layout_marginTop="4px"
-        android:src="@drawable/ic_launcher" >
+        android:src="@drawable/user1" >
 
     </ImageView>
 
@@ -29,5 +29,5 @@
        android:layout_weight="27.23"
        android:text="@+id/label"
        android:textColor="#FFFFFF"
-       android:textSize="40px" />
+       android:textSize="25dp" />
 </RelativeLayout>

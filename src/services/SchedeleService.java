@@ -57,29 +57,44 @@ public class SchedeleService extends Service {
 	@Override
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
+		
 		dbSchedule = new DBAdapterSchedules(this);
 		dbSchedule.open();
 
-		Bundle b = intent.getExtras();
-
-		String eventToDel = "";
-		eventToDel = (String) b.get("eventDel");
-
-		if (!(eventToDel == null))
-			cancelEvent(eventToDel);
-
-		String eventBoot = "";
-		eventToDel = (String) b.get("boot");
-		if (eventBoot.equals("boot"))
-			bootAddAllScheduleToSystem();
-
-		String profofileIdFromSet = "";
-		profofileIdFromSet = (String) b.get("id");
-		if (!profofileIdFromSet.equals(""))
-			addAlarm(profofileIdFromSet);
-
 		listActiveSchedule = new ArrayList<Schedule>();
 		listActiveSchedule = dbSchedule.getActiveSchedules();
+		Bundle b = intent.getExtras();
+		String activity = (String) b.get("uniqueId");
+
+		
+		if (activity.equals("ScheduleSet"))
+		{    Log.e("TAG", "beb scheduleset");	
+
+			String profofileIdFromSet = "";
+		profofileIdFromSet = (String) b.get("id");
+	    Log.e("TAG", "2,6   "+profofileIdFromSet);	
+
+		
+		if (!profofileIdFromSet.equals(""))
+			addAlarm(profofileIdFromSet);
+		Log.e("TAG", "fin scheduleset");}
+		
+		else if (activity.equals("ScheduleList"))
+		{Log.e("TAG", "deb scheduleList");
+		String eventToDel = "a";
+		eventToDel = (String) b.get("eventDel");
+
+		
+		
+		if (!(eventToDel.equals("a")))
+			{cancelEvent(eventToDel);    Log.e("TAG", "pff");	}
+		}
+		else if (activity.equals("Boot"))
+		{
+			bootAddAllScheduleToSystem();
+		}
+		
+
 		// TODO Auto-generated method stub
 
 		Toast.makeText(getApplicationContext(), "Service Working", 1).show();
@@ -101,12 +116,12 @@ public class SchedeleService extends Service {
 		for (int i = 0; i < listActiveSchedule.size(); i++) {
 			hour = listActiveSchedule.get(i).getProfileHour();
 			min = listActiveSchedule.get(i).getProfileMinute();
+			int idbd=listActiveSchedule.get(i).getId();
 			Log.e("TAG", "" + min);
 
-			int id = setup(10, 01, 10);
+		setup(hour, min, idbd);
 
-			listActiveSchedule.get(i).setIdEv("" + id);
-			dbSchedule.addIdEvInDb(listActiveSchedule.get(i).getId(), id);
+			
 
 			Log.e("TAG", "id :" + listActiveSchedule.get(i).getIdEv());
 
@@ -126,7 +141,7 @@ public class SchedeleService extends Service {
 		final int _id = (int) System.currentTimeMillis();
 
 		Intent scheduleIntent = new Intent(this, SoundTimer.class);
-
+		
 		scheduleIntent.putExtra("za3ma", "" + id);
 
 		pi = PendingIntent.getBroadcast(this, 0, scheduleIntent,
@@ -138,13 +153,17 @@ public class SchedeleService extends Service {
 
 	}
 
-	public void addAlarm(String profileId) {
+	public void addAlarm(String profileId) {    Log.e("TAG", "yezi mala");	
+
 		Schedule schedule = new Schedule();
 		schedule = dbSchedule.getSchedulePref(profileId);
+		
 		int hour = schedule.getProfileHour();
 		int min = schedule.getProfileMinute();
 		int id = schedule.getId();
 		setup(hour, min, id);
+	    Log.e("TAG", "yezi bala");	
+
 
 	}
 }

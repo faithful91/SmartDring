@@ -12,6 +12,8 @@ public class BootStartUpReciever extends BroadcastReceiver {
 		
 		// Start Service On Boot Start Up
 		Intent service = new Intent(context, SchedeleService.class);
+		service.putExtra("uniqueId","Boot");  
+
 		service.putExtra("boot", "boot");
 		context.startService(service);
 	}

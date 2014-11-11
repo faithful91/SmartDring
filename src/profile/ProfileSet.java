@@ -65,7 +65,7 @@ public class ProfileSet extends Activity {
 		voicetxtv = (TextView) findViewById(R.id.voicetxtv);
 		Toast.makeText(getApplicationContext(), SharedPref, Toast.LENGTH_LONG)
 				.show();
-
+		
 		verifPrefSharedExist(SharedPref);
 
 		initBar(alarm, AudioManager.STREAM_ALARM, alarmtxtv, "alarm");
@@ -211,6 +211,13 @@ public class ProfileSet extends Activity {
 
 	}
 
-	
+	public void saveActifProfile(String profileName) {
+		String profile;
+		pref = getApplicationContext().getSharedPreferences("ActifProfile", 0);
+		Editor editor = pref.edit();
+				editor.putString("profile", profileName);
+			editor.commit();
+			profile = pref.getString("profile", null);
+		}
 	
 }

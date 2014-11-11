@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 public class DBAdapterSchedules {
@@ -202,13 +203,7 @@ public class DBAdapterSchedules {
 		int i = 0;
 		String selectQuery = "SELECT  * FROM " + db_table;
 		Cursor cursor = db.rawQuery(selectQuery, null);
-		if (cursor.moveToFirst()) {
-			do {
-				i = (Integer.parseInt(cursor.getString(0)));
-				;
-
-			} while (cursor.moveToNext());
-		}
+		
 		String profileNamex = "" + schedule.getProfileName();
 		String profileHour = "" + schedule.getProfileHour();
 		String profileMinute = "" + schedule.getProfileMinute();
@@ -235,8 +230,16 @@ public class DBAdapterSchedules {
 		values.put(db_day6, day6);
 
 		db.insert("schedulesTable", null, values);
+		if (cursor.moveToFirst()) {
+			do {
+				i = (Integer.parseInt(cursor.getString(0)));
+			    Log.e("TAG", "the number of schuleis"+i);	
 
-		return i + 1;
+				;
+
+			} while (cursor.moveToNext());
+		}
+		return i ;
 
 	}
 
@@ -286,4 +289,19 @@ public class DBAdapterSchedules {
 			} while (cursor.moveToNext());
 		}
 	}
+	public boolean verifId(String id) {
+		boolean existe=false;
+		// Select All Query
+		String selectQuery = "SELECT  * FROM " + db_table + " WHERE _id="
+				+ id;
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				existe=true;
+			} while (cursor.moveToNext());
+		}
+		return existe;
+	}
+
 }
+

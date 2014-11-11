@@ -2,130 +2,113 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="horizontal"
+    android:padding="10dp" >
 
-   
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ToggleButton
+            android:id="@+id/day0toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textOff="Lun"
+            android:textOn="Lun" />
+
+        <ToggleButton
+            android:id="@+id/day1toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textOff="Mar"
+            android:textOn="Mar" />
+
+        <ToggleButton
+            android:id="@+id/day2toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textOff="Mer"
+            android:textOn="Mer" />
+
+        <ToggleButton
+            android:id="@+id/day3toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textOff="Jeu"
+            android:textOn="Jeu" />
+
+        <ToggleButton
+            android:id="@+id/day4toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textOff="Ven"
+            android:textOn="Ven" />
+
+        <ToggleButton
+            android:id="@+id/day5toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textOff="Sam"
+            android:textOn="Sam" />
+
+        <ToggleButton
+            android:id="@+id/day6toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="Dim"
+            android:textOn="Dim" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp" >
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <ToggleButton
-                android:id="@+id/day0toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textOff="Lun"
-                android:textOn="Lun" />
-
-            <ToggleButton
-                android:id="@+id/day1toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textOff="Mar"
-                android:textOn="Mar" />
-
-            <ToggleButton
-                android:id="@+id/day2toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textOff="Mer"
-                android:textOn="Mer" />
-
-            <ToggleButton
-                android:id="@+id/day3toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textOff="Jeu"
-                android:textOn="Jeu" />
-
-            <ToggleButton
-                android:id="@+id/day4toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textOff="Ven"
-                android:textOn="Ven" />
-
-            <ToggleButton
-                android:id="@+id/day5toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textOff="Sam"
-                android:textOn="Sam" />
-
-            <ToggleButton
-                android:id="@+id/day6toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textOff="Dim"
-                android:textOn="Dim" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical" >
+            android:text="Profile"
+            android:textColor="#FFFFFFFF" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Profile"
-                android:textColor="#FFFFFFFF" />
+        <Spinner
+            android:id="@+id/listProfileSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFFFF" />
 
-            <Spinner
-                android:id="@+id/listProfileSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFFFF" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Temps de début"
+            android:textColor="#FFFFFFFF" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Temps de début"
-                android:textColor="#FFFFFFFF" />
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
 
-            <TimePicker
-                android:id="@+id/timePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
+        <Switch
+            android:id="@+id/State"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Etat"
+            android:textColor="#FFFFFFFF" />
 
-            <TableLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <TableRow>
-
-                    <Switch
-                        android:id="@+id/State"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Etat"
-                        android:textColor="#FFFFFFFF" />
-                        />
-                </TableRow>
-
-                <Button
-                    android:id="@+id/doneButton"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Enregistrer"
-                    android:textColor="#FFFFFFFF" />
-            </TableLayout>
-        </LinearLayout>
+        <Button
+            android:id="@+id/doneButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Enregistrer"
+            android:textColor="#FFFFFFFF" />
     </LinearLayout>
 
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -204,10 +205,14 @@ public class ScheduleSet extends Activity implements OnClickListener {
 		if (whoCallMe.equals("OldProg")) {
 			dbSchedule.saveOldSchedulePrefInDB(saveOldSchedule(profileId));
 			service.putExtra("id", profileId);
+			service.putExtra("uniqueId","ScheduleSet");  
+
 		} else {
 			profileIdInFut = dbSchedule
 					.saveNewSchedulePrefInDB(saveNewSchedule());
 			service.putExtra("id", "" + profileIdInFut);
+
+			service.putExtra("uniqueId","ScheduleSet");  
 		}
 
 	
@@ -216,4 +221,5 @@ public class ScheduleSet extends Activity implements OnClickListener {
 
 		
 		}
+	
 }

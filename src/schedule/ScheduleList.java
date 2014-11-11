@@ -66,7 +66,7 @@ public class ScheduleList extends Activity {
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
 				.getMenuInfo();
-		if (item.getTitle() == "Mofifier") {
+		if (item.getTitle() == "Modifier") {
 			Intent intent = new Intent(this, ScheduleSet.class);
 			intent.putExtra("sp", ""
 					+ db.getAllSchedules().get(info.position).getId());
@@ -75,16 +75,13 @@ public class ScheduleList extends Activity {
 		}
 
 		else if (item.getTitle() == "Supprimer") {
-			String idEv = db.getAllSchedules().get(info.position).getIdEv();
-			Intent service = new Intent(this, SchedeleService.class);
-			service.putExtra("eventDel", "" + idEv);
+			
 			db.deleteSchedule(""
 					+ db.getAllSchedules().get(info.position).getId());
 			ListScheduleAdapter adapter = new ListScheduleAdapter(this,
 					db.getAllSchedules());
 			listSchedule.setAdapter(adapter);
-			if (!(idEv == null))
-				this.startService(service);
+			
 		} else {
 			return false;
 		}
