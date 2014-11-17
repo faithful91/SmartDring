@@ -93,6 +93,7 @@ public final class R {
         public static final int kk=0x7f030004;
         public static final int list_profile=0x7f030005;
         public static final int list_schedule=0x7f030006;
+        public static final int spinner_item=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f070000;

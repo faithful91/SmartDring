@@ -10,6 +10,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -96,6 +97,8 @@ public class ScheduleSet extends Activity implements OnClickListener {
 				if (dbProfile.getAllProfilesForSpinner().get(i)
 						.equals(profileName))
 					listProfileSpinner.setSelection(i);
+					listProfileSpinner.setBackgroundColor(Color.GRAY);
+				
 			}
 		}
 

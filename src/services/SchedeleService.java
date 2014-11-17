@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 public class SchedeleService extends Service {
 	PendingIntent pi;
-	BroadcastReceiver br;
 	AlarmManager am;
 	Context c;
 	DBAdapterSchedules dbSchedule;
@@ -41,7 +40,6 @@ public class SchedeleService extends Service {
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
-		Toast.makeText(getApplicationContext(), "Service Created", 1).show();
 
 		super.onCreate();
 	}
@@ -97,7 +95,6 @@ public class SchedeleService extends Service {
 
 		// TODO Auto-generated method stub
 
-		Toast.makeText(getApplicationContext(), "Service Working", 1).show();
 
 	}
 
@@ -153,7 +150,7 @@ public class SchedeleService extends Service {
 
 	}
 
-	public void addAlarm(String profileId) {    Log.e("TAG", "yezi mala");	
+	public void addAlarm(String profileId) {   
 
 		Schedule schedule = new Schedule();
 		schedule = dbSchedule.getSchedulePref(profileId);
@@ -162,7 +159,7 @@ public class SchedeleService extends Service {
 		int min = schedule.getProfileMinute();
 		int id = schedule.getId();
 		setup(hour, min, id);
-	    Log.e("TAG", "yezi bala");	
+	  
 
 
 	}

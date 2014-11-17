@@ -110,7 +110,7 @@ public class ProfileList extends Activity {
 			e.activeProfile(db.getAllProfiles().get(info.position).getName());
 			saveActifProfile(db.getAllProfiles().get(info.position)
 					.getName());
-			Toast.makeText(getApplicationContext(), "Le profile "+db.getAllProfiles().get(info.position)
+			Toast.makeText(getApplicationContext(), "Le profil "+db.getAllProfiles().get(info.position)
 		.getName()+" est activé" ,
    Toast.LENGTH_LONG).show();
 			ListProfileAdapter adapter = new ListProfileAdapter(this,
@@ -124,7 +124,7 @@ public class ProfileList extends Activity {
 			{
 				final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 				alert.setTitle("Erreur");
-				alert.setMessage("Impossible de supprimier le profile actif");
+				alert.setMessage("Impossible de supprimier le profil actif");
 				alert.setNegativeButton("Ok",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
@@ -187,7 +187,7 @@ public class ProfileList extends Activity {
 		case R.id.add_profile:
 			final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 			final EditText input = new EditText(this);
-			alert.setTitle("Entre profile name");
+			alert.setTitle("Entrer le nom du profil");
 
 			alert.setView(input);
 			alert.setPositiveButton("Ok",
@@ -202,8 +202,7 @@ public class ProfileList extends Activity {
 
 							list1.setAdapter(adapter);
 
-							Toast.makeText(getApplicationContext(), value,
-									Toast.LENGTH_SHORT).show();
+							
 						}
 					});
 
